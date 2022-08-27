@@ -51,6 +51,14 @@ function BurgerIngredients({data}) {
       </section>
       <section className='Ingredients-section mt-10'>
         <h2 className='text text_type_main-medium'>Начинки</h2>
+        <ul className='Ingredients-list mt-6'>
+        {data
+            .filter((ing) => ing.type === 'main')
+            .map((ing) => (
+              <Ingredient data={ing} key={ing._id}/>
+            ))
+          }
+        </ul>
       </section>
     </article>
   )
