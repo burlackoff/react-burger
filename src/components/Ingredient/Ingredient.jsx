@@ -1,8 +1,10 @@
-
+import './Ingredient.css'
 
 function Ingredient({data}) {
   return (
-    <img src={data.image} alt={data.name}/>
+    <li className='Ingredient'>
+      <img src={data.image} alt={data.name} className="Ingredient-image"/>
+    </li>
   )
 }
 

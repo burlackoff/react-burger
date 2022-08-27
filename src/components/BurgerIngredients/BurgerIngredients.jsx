@@ -10,7 +10,7 @@ function BurgerIngredients({data}) {
   return (
     <article className="Ingredients mt-10">
       <h1 className="text text_type_main-large">Соберите бургер</h1>
-      <nav className="Ingredients-tabs">
+      <nav className="Ingredients-tabs mt-5">
         <li>
           <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
             Булки
@@ -29,11 +29,11 @@ function BurgerIngredients({data}) {
       </nav>
       <section className='Ingredients-section mt-10'>
         <h2 className='text text_type_main-medium'>Булки</h2>
-        <ul className='Ingredients-list'>
+        <ul className='Ingredients-list mt-6'>
           {data
             .filter((ing) => ing.type === 'bun')
             .map((ing) => (
-              <Ingredient data={ing} key={ing._id} />
+              <Ingredient data={ing} key={ing._id}/>
             ))
           }
         </ul>

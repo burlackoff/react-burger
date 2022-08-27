@@ -1,0 +1,9 @@
+.Ingredient {
+  display: flex;
+  flex-direction: column;
+}
+
+.Ingredient-image {
+  width: 240px;
+  height: 120px;
+}
