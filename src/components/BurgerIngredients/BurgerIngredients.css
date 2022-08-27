@@ -1,0 +1,11 @@
+.Ingredients {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  width: 100%;
+}
+
+.Ingredients-tabs {
+  display: flex;
+}
+

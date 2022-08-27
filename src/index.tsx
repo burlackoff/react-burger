@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css'
 import reportWebVitals from './reportWebVitals';
 import AppHeader from './components/AppHeader/AppHeader'; 
+import BurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
+import BurgerConstructor from './components/BurgerConstructor/BurgerConstructor';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,6 +12,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <AppHeader />
+    <div className="content-wrapper">
+      
+      <BurgerIngredients />
+      <BurgerConstructor />
+      
+    </div>
   </React.StrictMode>
 );
 

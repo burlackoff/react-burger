@@ -8,7 +8,7 @@ import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
 function AppHeader() {
   return (
-      <header className="App-header">
+      <header className="App-header mt-10">
         <div className="App-content m-4">
           <nav className="App-navbar">
             <NavLink text={"Конструктор"} className="p-4 m-4" icon={<BurgerIcon type="primary" />} />
