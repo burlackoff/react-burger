@@ -7,5 +7,5 @@
 
 .Ingredients-tabs {
   display: flex;
+  list-style: none;
 }
-

@@ -11,8 +11,12 @@ function AppHeader() {
       <header className="App-header mt-10">
         <div className="App-content m-4">
           <nav className="App-navbar">
-            <NavLink text={"Конструктор"} className="p-4 m-4" icon={<BurgerIcon type="primary" />} />
-            <NavLink text={"Лента заказов"} className="p-4 m-4" icon={<ListIcon type="secondary" />} type="secondary" />
+            <li>
+              <NavLink text={"Конструктор"} className="p-4 m-4" icon={<BurgerIcon type="primary" />} />
+            </li>
+            <li>
+              <NavLink text={"Лента заказов"} className="p-4 m-4" icon={<ListIcon type="secondary" />} type="secondary" />
+            </li>
           </nav>
           <Logo/>
           <NavLink text={"Личный кабинет"} className="p-4 m-4" icon={<ProfileIcon type="secondary" />} type="secondary" />

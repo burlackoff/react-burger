@@ -18,6 +18,7 @@
 }
 
 .App-navbar {
+  list-style: none;
   display: flex;
   gap: 8px;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css'
+import {data} from './utils/data';
 import reportWebVitals from './reportWebVitals';
 import AppHeader from './components/AppHeader/AppHeader'; 
 import BurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
@@ -12,12 +13,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <AppHeader />
-    <div className="content-wrapper">
+    <main className="content-wrapper">
       
-      <BurgerIngredients />
+      <BurgerIngredients data={data}/>
       <BurgerConstructor />
       
-    </div>
+    </main>
   </React.StrictMode>
 );
 
