@@ -1,4 +1,4 @@
-.Ingredient {
+.ingredient {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,12 +10,12 @@
   cursor: pointer;
 }
 
-.Ingredient-image {
+.image {
   width: 240px;
   height: 120px;
 }
 
-.Ingredient-price {
+.price {
   display: flex;
   justify-content: center;
   gap: 8px;
