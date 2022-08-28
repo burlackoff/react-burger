@@ -1,10 +1,10 @@
-.burger-constructor {
+.constructor {
   max-width: 600px;
   width: 100%;
   margin-top: 100px;
 }
 
-.burger-constructor-list {
+.list {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -14,7 +14,7 @@
   margin: 0;
 }
 
-.burger-constructor-filling {
+.filling {
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -25,25 +25,25 @@
   max-height: 465px;
 }
 
-.burger-constructor-item-bun {
+.itembun {
   box-sizing: border-box;
   display: flex;
   justify-content: end;
 }
 
-.burger-constructor-item {
+.item {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.burger-constructor-order {
+.order {
   display: flex;
   justify-content: end;
   gap: 40px;
 }
 
-.burger-constructor-price {
+.price {
   display: flex;
   align-items: center;
   gap: 10px;

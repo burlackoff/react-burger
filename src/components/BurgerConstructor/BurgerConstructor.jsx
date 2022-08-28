@@ -1,10 +1,10 @@
-import './BurgerConstructor.css';
+import style from './BurgerConstructor.module.css';
 import {ConstructorElement, DragIcon, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
 function BurgerConstructor({data}) {
   return (
-    <article className='burger-constructor pl-4'>
-      <div className='burger-constructor-item-bun pr-4'>
+    <article className={style.constructor + ' pl-4'}>
+      <div className={style.itembun + ' pr-4'}>
         <ConstructorElement
           type="top"
           isLocked={true}
@@ -14,9 +14,9 @@ function BurgerConstructor({data}) {
         />
       </div>
       <div>
-        <ul className='burger-constructor-filling'>
+        <ul className={style.filling}>
           {data.filter((ing) => ing.type !== 'bun').map((ing) => (
-            <li key={ing._id} className='burger-constructor-item pr-2'>
+            <li key={ing._id} className={style.item + ' pr-2'}>
               <DragIcon type="primary" />
               <ConstructorElement
                 text={ing.name}
@@ -27,7 +27,7 @@ function BurgerConstructor({data}) {
           ))}
         </ul>
       </div>
-      <div className='burger-constructor-item-bun pr-4'>
+      <div className={style.itembun + ' pr-4'}>
         <ConstructorElement
           type="bottom"
           isLocked={true}
@@ -36,8 +36,8 @@ function BurgerConstructor({data}) {
           thumbnail={data[0].image}
         />
       </div>
-      <div className='burger-constructor-order mt-10'>
-        <div className='burger-constructor-price'>
+      <div className={style.order + ' mt-10'}>
+        <div className={style.price}>
           <p className="text text_type_digits-medium">610</p>
           <CurrencyIcon type="primary" />
         </div>
