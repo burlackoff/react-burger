@@ -3,7 +3,7 @@ import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger
 
 function BurgerConstructor({data}) {
   return (
-    <ul className='burger-constructor mt-25'>
+    <ul className='burger-constructor'>
       <li>
         <ConstructorElement
           type="top"
