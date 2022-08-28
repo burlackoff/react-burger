@@ -1,4 +1,4 @@
-.Nav-link {
+.link {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -7,6 +7,6 @@
   transition: all 0.4s;
 }
 
-.Nav-link:hover {
+.link:hover {
   opacity: 0.5;
 }
