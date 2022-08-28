@@ -1,6 +1,5 @@
 import React from 'react';
-
-import './BurgerIngredients.css'
+import style from './BurgerIngredients.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredient from '../Ingredient/Ingredient';
 
@@ -8,9 +7,9 @@ function BurgerIngredients({data}) {
   const [current, setCurrent] = React.useState('Булки')
 
   return (
-    <article className="Ingredients mt-10">
+    <article className={style.ingredients + ' mt-10'}>
       <h1 className="text text_type_main-large">Соберите бургер</h1>
-      <nav className="Ingredients-tabs mt-5">
+      <nav className={style.tabs + ' mt-5'}>
         <li>
           <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
             Булки
@@ -27,10 +26,10 @@ function BurgerIngredients({data}) {
           </Tab>
         </li>
       </nav>
-      <div className='Ingredients-content-wrapper'>
-        <section className='Ingredients-section mt-10'>
+      <div className={style.wrapper}>
+        <section className='mt-10'>
           <h2 className='text text_type_main-medium'>Булки</h2>
-          <ul className='Ingredients-list mt-6'>
+          <ul className={style.list + ' mt-6'}>
             {data
               .filter((ing) => ing.type === 'bun')
               .map((ing) => (
@@ -39,9 +38,9 @@ function BurgerIngredients({data}) {
             }
           </ul>
         </section>
-        <section className='Ingredients-section mt-10'>
+        <section className='mt-10'>
           <h2 className='text text_type_main-medium'>Соусы</h2>
-          <ul className='Ingredients-list mt-6'>
+          <ul className={style.list + ' mt-6'}>
           {data
               .filter((ing) => ing.type === 'sauce')
               .map((ing) => (
@@ -50,9 +49,9 @@ function BurgerIngredients({data}) {
             }
           </ul>
         </section>
-        <section className='Ingredients-section mt-10'>
+        <section className='mt-10'>
           <h2 className='text text_type_main-medium'>Начинки</h2>
-          <ul className='Ingredients-list mt-6'>
+          <ul className={style.list + ' mt-6'}>
           {data
               .filter((ing) => ing.type === 'main')
               .map((ing) => (
