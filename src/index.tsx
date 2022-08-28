@@ -16,7 +16,7 @@ root.render(
     <main className="content-wrapper mb-10">
       
       <BurgerIngredients data={data}/>
-      <BurgerConstructor />
+      <BurgerConstructor data={data}/>
       
     </main>
   </React.StrictMode>

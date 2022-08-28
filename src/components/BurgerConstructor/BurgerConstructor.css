@@ -1,5 +1,22 @@
 .burger-constructor {
   max-width: 600px;
   width: 100%;
-  background-color: blueviolet;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 100px;
+}
+
+.burger-constructor-filling {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  overflow-y: scroll;
+  max-height: 465px;
 }
