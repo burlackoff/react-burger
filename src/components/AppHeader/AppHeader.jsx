@@ -8,7 +8,7 @@ import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
 function AppHeader() {
   return (
-      <header className="App-header mt-10">
+      <header className="App-header">
         <div className="App-content m-4">
           <nav className="App-navbar">
             <li>

@@ -18,3 +18,30 @@
   flex-wrap: wrap;
   gap: 24px;
 }
+
+.Ingredients-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  max-height: calc(100vh - 285px);
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgba(47, 47, 55, 1);
+}
+
+/* Цвет бегунка полосы, а так же его закругление. */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  background-color: rgba(133, 133, 173, 1);
+}
+
+/* Цвет бегунка при наведении на него курсора. */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #56999f;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}

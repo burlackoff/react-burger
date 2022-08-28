@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <AppHeader />
-    <main className="content-wrapper">
+    <main className="content-wrapper mb-10">
       
       <BurgerIngredients data={data}/>
       <BurgerConstructor />
