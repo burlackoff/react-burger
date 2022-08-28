@@ -1,9 +1,6 @@
 import './AppHeader.css';
-import {Logo} from '@ya.praktikum/react-developer-burger-ui-components';
+import {Logo, BurgerIcon, ListIcon, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import NavLink from '../NavLink/NavLink';
-import {BurgerIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {ListIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 function AppHeader() {
@@ -18,8 +15,12 @@ function AppHeader() {
               <NavLink text={"Лента заказов"} className="p-4 m-4" icon={<ListIcon type="secondary" />} type="secondary" />
             </li>
           </nav>
-          <Logo/>
-          <NavLink text={"Личный кабинет"} className="p-4 m-4" icon={<ProfileIcon type="secondary" />} type="secondary" />
+          <div className='App-logo'>
+            <Logo/>
+          </div>
+          <nav className="App-navbar">
+            <NavLink text={"Личный кабинет"} className="p-4 m-4" icon={<ProfileIcon type="secondary" />} type="secondary" />
+          </nav>
         </div>
       </header>
   );
