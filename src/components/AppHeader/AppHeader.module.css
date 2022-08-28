@@ -1,4 +1,4 @@
-.App-header {
+.header {
   display: flex;
   justify-content: center;
   max-width: 1920px;
@@ -8,7 +8,7 @@
   box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
 }
 
-.App-content {
+.content {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,13 +18,15 @@
   position: relative;
 }
 
-.App-navbar {
+.navlist {
   list-style: none;
   display: flex;
   gap: 8px;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
+.logo {
   position: absolute;
   top: 50%;
   left: 50%;
