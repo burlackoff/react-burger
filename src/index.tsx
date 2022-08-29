@@ -3,22 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './index.css'
 import {data} from './utils/data';
 import reportWebVitals from './reportWebVitals';
-import AppHeader from './components/AppHeader/AppHeader'; 
-import BurgerIngredients from './components/BurgerIngredients/BurgerIngredients';
-import BurgerConstructor from './components/BurgerConstructor/BurgerConstructor';
+import App from './components/App/App';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <AppHeader />
-    <main className="content-wrapper mb-10">
-      
-      <BurgerIngredients data={data}/>
-      <BurgerConstructor data={data}/>
-      
-    </main>
+    <App data={data} />
   </React.StrictMode>
 );
 
