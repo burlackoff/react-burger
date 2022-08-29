@@ -1,6 +1,7 @@
 import style from './Ingredient.module.css';
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
+import {ingredientType} from '../../utils/types';
 
 function Ingredient({data}) {
   const [count, setCount] = React.useState(0);
@@ -17,5 +18,9 @@ function Ingredient({data}) {
     </li>
   )
 }
+
+Ingredient.propTypes = {
+  data: ingredientType
+};
 
 export default Ingredient

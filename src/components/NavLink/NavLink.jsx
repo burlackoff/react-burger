@@ -1,5 +1,5 @@
 import style from './NavLink.module.css';
-
+import PropTypes from 'prop-types';
 
 function NavLink({text, icon, type}) {
   const color = type === 'secondary' ? 'text text_type_main-default text_color_inactive' : 'text text_type_main-default';
@@ -10,6 +10,12 @@ function NavLink({text, icon, type}) {
       <p className={color}>{text}</p>
     </a>
   )
+}
+
+NavLink.propTypes = {
+  text: PropTypes.string,
+  icon: PropTypes.object,
+  type: PropTypes.string
 }
 
 export default NavLink
