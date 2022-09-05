@@ -2,20 +2,21 @@ import React from 'react';
 import AppHeader from '../AppHeader/AppHeader'; 
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import {data} from '../../utils/data'
+import {data} from '../../utils/data';
 
 function App() {
   const [state, setState] = React.useState({
-    success: true,
-    data: data
+    data: data,
+    success: true
   });
 
   React.useEffect(() => {
     const getData = async () => {
+      setState({...state, success: false})
       const res = await fetch('https://norma.nomoreparties.space/api/ingredients');
       const data = await res.json();
       console.log(data);
-      setState({success: data.success, data: data.data})
+      setState({data: data.data, success: data.success})
     }
     getData()
   }, [])
