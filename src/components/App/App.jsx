@@ -2,6 +2,8 @@ import React from 'react';
 import AppHeader from '../AppHeader/AppHeader'; 
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
+import ModalOverlay from '../ModalOverlay/ModalOverlay';
+import Modal from '../Modal/Modal';
 import {data} from '../../utils/data';
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
       setState({data: data.data, success: data.success})
     }
     getData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -30,6 +33,9 @@ function App() {
         <BurgerConstructor data={state.data}/>
         
       </main>
+        <ModalOverlay>
+          <Modal></Modal>
+        </ModalOverlay>
     </>
   );
 }
