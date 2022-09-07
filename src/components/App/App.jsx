@@ -2,8 +2,6 @@ import React from 'react';
 import AppHeader from '../AppHeader/AppHeader'; 
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import ModalOverlay from '../ModalOverlay/ModalOverlay';
-import Modal from '../Modal/Modal';
 import {data} from '../../utils/data';
 
 function App() {
@@ -33,9 +31,6 @@ function App() {
         <BurgerConstructor data={state.data}/>
         
       </main>
-        <ModalOverlay>
-          <Modal></Modal>
-        </ModalOverlay>
     </>
   );
 }

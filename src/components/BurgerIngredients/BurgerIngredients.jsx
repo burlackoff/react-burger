@@ -6,7 +6,7 @@ import {ingredientType} from '../../utils/types';
 import PropTypes from 'prop-types';
 
 function BurgerIngredients({data}) {
-  const [current, setCurrent] = React.useState('Булки')
+  const [current, setCurrent] = React.useState('Булки');
 
   return (
     <article className={style.ingredients + ' mt-10'}>
