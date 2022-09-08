@@ -4,12 +4,13 @@ import React from 'react';
 import {ingredientType} from '../../utils/types';
 
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
+import Modal from '../Modal/Modal';
 
 function Ingredient({data}) {
   const [count, setCount] = React.useState(0);
   const [activeModal, setActiveModal] = React.useState(false);
 
-  const handleCloseModal = (e) => {
+  const handleCloseModal = () => {
     setActiveModal(false)
   }
 
@@ -18,8 +19,8 @@ function Ingredient({data}) {
   }
 
   const modal = (
-    <ModalOverlay header="Закрыть модалку" onClose={handleCloseModal}>
-      <h2>Hello! It's ModalOverlay</h2>
+    <ModalOverlay onClose={handleCloseModal}>
+      <p>Hello</p>
     </ModalOverlay>
   )
 
