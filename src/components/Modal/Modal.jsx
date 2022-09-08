@@ -1,12 +1,20 @@
+import ReactDOM from 'react-dom';
+import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import style from './Modal.module.css';
 
-function Modal({visible, open}) {
-  return (
-    <div className={visible ? `${style.modal} + ${style.modalActive}` : ''} onClick = {() => open(false)}> 
-      <div className={style.content}>
-        
-      </div>
-    </div>
+const modalContainer = document.getElementById("modal");
+
+function Modal({visible, onClose, data}) {
+
+  return ReactDOM.createPortal(
+    (
+      <ModalOverlay visible={visible} onClose={onClose}>
+        <div className={style.content}>
+          {console.log(data)}
+        </div>
+      </ModalOverlay>
+    ),
+    modalContainer
   )
 }
 

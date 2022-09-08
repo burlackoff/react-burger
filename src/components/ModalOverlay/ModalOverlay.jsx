@@ -1,12 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import style from './ModalOverlay.module.css';
 import {escape} from '../../utils/constants';
 
-const modalContainer = document.getElementById("modal");
-
 function ModalOverlay(props) {
-  const {children, onClose} = props;
+  const {visible, children, onClose} = props;
 
   const handleEscapeClose = (e) => {
     if (e.key === escape) {onClose()}
@@ -25,13 +22,10 @@ function ModalOverlay(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return ReactDOM.createPortal(
-    (
-      <div className={style.modal} onClick={handleOverlayClose}>
+  return (
+      <div className={visible ? `${style.modal} + ${style.modalActive}` : `${style.modal}`} onClick={handleOverlayClose}>
         {children}
       </div>
-    ), 
-    modalContainer
   );
 }
 

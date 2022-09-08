@@ -3,6 +3,7 @@ import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import {data} from '../../utils/data';
+import style from './App.module.css';
 
 function App() {
   const [state, setState] = React.useState({
@@ -25,7 +26,7 @@ function App() {
   return (
     <>
       <AppHeader />
-      <main className="content-wrapper mb-10">
+      <main className={style.contentWrapper + ' mb-10'}>
         
         <BurgerIngredients data={state.data}/>
         <BurgerConstructor data={state.data}/>

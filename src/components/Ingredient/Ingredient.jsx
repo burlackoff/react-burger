@@ -3,7 +3,6 @@ import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-com
 import React from 'react';
 import {ingredientType} from '../../utils/types';
 
-import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import Modal from '../Modal/Modal';
 
 function Ingredient({data}) {
@@ -19,9 +18,7 @@ function Ingredient({data}) {
   }
 
   const modal = (
-    <ModalOverlay onClose={handleCloseModal}>
-      <p>Hello</p>
-    </ModalOverlay>
+    <Modal onClose={handleCloseModal} visible={activeModal} data={data} />
   )
 
   return (
