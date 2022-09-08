@@ -10,7 +10,6 @@ function Ingredient({data}) {
   const [activeModal, setActiveModal] = React.useState(false);
 
   const handleCloseModal = (e) => {
-    console.log(e);
     setActiveModal(false)
   }
 
