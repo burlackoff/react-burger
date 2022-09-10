@@ -2,7 +2,7 @@ import style from './IngredientDetails.module.css'
 
 function IngredientDetails({data}) {
   return (
-    <div className={style.content}>
+    <>
       <img src={data.image_large} alt={data.name} className={style.image}/>
       <h3 className='text text_type_main-medium mt-4'>{data.name}</h3>
       <ul className={style.infoList}>
@@ -23,7 +23,7 @@ function IngredientDetails({data}) {
           <span className='text text_type_digits-default text_color_inactive'>{data.carbohydrates}</span>
         </li>
       </ul>
-    </div>
+    </>
   )
 }
 

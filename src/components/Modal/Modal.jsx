@@ -18,7 +18,7 @@ function Modal({visible, onClose, children, title=true}) {
             </h2>
             <CloseIcon type="primary" onClick={onClose}/>
           </div>
-          <div>
+          <div className={style.content}>
             {children}
           </div>
         </div>
