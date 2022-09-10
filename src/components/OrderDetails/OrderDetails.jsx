@@ -6,7 +6,7 @@ function OrderDetails() {
     <>
       <h3 className='text text_type_digits-large'>034536</h3>
       <p className='text text_type_main-medium mt-8'>идентификатор заказа</p>
-      <img scr={iconImageDone} alt="Готово." className={style.icon}></img>
+      <img src={iconImageDone} alt="Готово." className={style.icon}></img>
       <p className='text text_type_main-default'>Ваш заказ начали готовить</p>
       <p className='text text_type_main-default text_color_inactive mt-2'>Дождитесь готовности на орбитальной станции</p>
     </>
