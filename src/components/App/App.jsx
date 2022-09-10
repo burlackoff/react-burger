@@ -16,7 +16,6 @@ function App() {
       setState({...state, success: false})
       const res = await fetch('https://norma.nomoreparties.space/api/ingredients');
       const data = await res.json();
-      console.log(data);
       setState({data: data.data, success: data.success})
     }
     getData()

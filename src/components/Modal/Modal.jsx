@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './Modal.module.css';
+import PropTypes from 'prop-types';
 
 
 const modalContainer = document.getElementById("modal");
@@ -26,6 +27,13 @@ function Modal({visible, onClose, children, title=true}) {
     ),
     modalContainer
   )
+}
+
+Modal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  children: PropTypes.object.isRequired,
+  onClose: PropTypes.func.isRequired,
+  title: PropTypes.bool
 }
 
 export default Modal
