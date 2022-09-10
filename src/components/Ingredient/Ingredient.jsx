@@ -4,6 +4,7 @@ import React from 'react';
 import {ingredientType} from '../../utils/types';
 
 import Modal from '../Modal/Modal';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
 
 function Ingredient({data}) {
   const [count, setCount] = React.useState(0);
@@ -18,7 +19,9 @@ function Ingredient({data}) {
   }
 
   const modal = (
-    <Modal onClose={handleCloseModal} visible={activeModal} data={data} />
+    <Modal onClose={handleCloseModal} visible={activeModal}>
+      <IngredientDetails data={data} />
+    </Modal>
   )
 
   return (
