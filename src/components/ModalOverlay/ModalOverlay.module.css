@@ -1,7 +1,7 @@
 .modal {
   width: 100vw;
   height: 100vh;
-  background: var(--background-element);
+  background-color: rgba(47, 47, 55, 0.6);
   position: fixed;
   top: 0;
   left: 0;
