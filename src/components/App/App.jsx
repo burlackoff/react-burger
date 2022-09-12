@@ -13,10 +13,15 @@ function App() {
 
   React.useEffect(() => {
     const getData = async () => {
-      setState({...state, success: false})
-      const res = await fetch('https://norma.nomoreparties.space/api/ingredients');
-      const data = await res.json();
-      setState({data: data.data, success: data.success})
+      try {
+        setState({...state, success: false})
+        const res = await fetch('https://norma.nomoreparties.space/api/ingredients');
+        const data = await res.json();
+        setState({data: data.data, success: data.success})
+      }
+      catch(err) {
+        console.log(err);
+      }
     }
     getData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
