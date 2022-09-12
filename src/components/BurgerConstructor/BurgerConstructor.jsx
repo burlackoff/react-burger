@@ -1,28 +1,10 @@
-import React from 'react';
 import style from './BurgerConstructor.module.css';
 import {ConstructorElement, DragIcon, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ingredientType} from '../../utils/types';
 import PropTypes from 'prop-types';
-import Modal from '../Modal/Modal';
-import OrderDetails from '../OrderDetails/OrderDetails';
 
-function BurgerConstructor({data}) {
-  const [activeModal, setActiveModal] = React.useState(false);
-
-  const handleOpenModal = () => {
-    setActiveModal(true)
-  }
-
-  const handleCloseModal = () => {
-    setActiveModal(false)
-  }
-
-  const modal = (
-    <Modal onClose={handleCloseModal} visible={activeModal} title={false}>
-      <OrderDetails/>
-    </Modal>
-  )
-
+function BurgerConstructor({data, openModal}) {
+  
   return (
     <article className={style.constructor + ' pl-4'}>
       <div className={style.itembun + ' pr-4'}>
@@ -62,17 +44,17 @@ function BurgerConstructor({data}) {
           <p className="text text_type_digits-medium">610</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large" onClick={handleOpenModal}>
+        <Button type="primary" size="large" onClick={openModal}>
           Оформить заказ
         </Button>
-        {activeModal && modal}
       </div>
     </article>
   )
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingredientType).isRequired
+  data: PropTypes.arrayOf(ingredientType).isRequired,
+  openModal: PropTypes.func.isRequired
 };
 
 export default BurgerConstructor
