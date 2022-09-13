@@ -15,9 +15,11 @@ function Modal({visible, onClose, children, title}) {
     const handleEscapeClose = (e) => {
       if (e.key === escape) {onClose()}
     }
-  
-    document.addEventListener('keydown', handleEscapeClose);
-
+    
+    if (visible) {
+      document.addEventListener('keydown', handleEscapeClose);
+    }
+    
     return () => {
       document.removeEventListener('keydown', handleEscapeClose);
     }
