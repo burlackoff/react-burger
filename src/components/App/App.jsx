@@ -8,7 +8,7 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
 
 function App() {
-  const [state, setState] = React.useState([]);
+  const [ingredients, setIngredients] = React.useState([]);
   const [currentData, setCurrentData] = React.useState({});
   const [activeModalOrder, setActiveModalOrder] = React.useState(false);
   const [activeModalIngredient, setActiveModalIngredient] = React.useState(false);
@@ -40,7 +40,7 @@ function App() {
                 }
                 return Promise.reject(res.status);
             })
-            .then(response => setState(response.data))
+            .then(response => setIngredients(response.data))
             .catch(err => console.error(err))
     }
     getData()
@@ -52,8 +52,8 @@ function App() {
       <AppHeader />
       <main className={style.contentWrapper + ' mb-10'}>
         
-        <BurgerIngredients data={state} openModal={handleCurrentData}/>
-        {state.length && <BurgerConstructor data={state} openModal={handleOpenModalOrder}/>}
+        <BurgerIngredients data={ingredients} openModal={handleCurrentData}/>
+        {ingredients.length && <BurgerConstructor data={ingredients} openModal={handleOpenModalOrder}/>}
         
       </main>
       <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
