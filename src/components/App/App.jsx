@@ -2,17 +2,13 @@ import React from 'react';
 import AppHeader from '../AppHeader/AppHeader'; 
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import {data} from '../../utils/data';
 import style from './App.module.css';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
 
 function App() {
-  const [state, setState] = React.useState({
-    data: data,
-    success: true
-  });
+  const [state, setState] = React.useState([]);
   const [currentData, setCurrentData] = React.useState({});
   const [activeModalOrder, setActiveModalOrder] = React.useState(false);
   const [activeModalIngredient, setActiveModalIngredient] = React.useState(false);
@@ -36,16 +32,16 @@ function App() {
 
 
   React.useEffect(() => {
-    const getData = async () => {
-      try {
-        setState({...state, success: false})
-        const res = await fetch('https://norma.nomoreparties.space/api/ingredients');
-        const data = await res.json();
-        setState({data: data.data, success: data.success})
-      }
-      catch(err) {
-        console.log(err);
-      }
+    const getData = () => {
+      fetch('https://norma.nomoreparties.space/api/ingredients')
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(res.status);
+            })
+            .then(response => setState(response.data))
+            .catch(err => console.error(err))
     }
     getData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,8 +52,8 @@ function App() {
       <AppHeader />
       <main className={style.contentWrapper + ' mb-10'}>
         
-        <BurgerIngredients data={state.data} openModal={handleCurrentData}/>
-        <BurgerConstructor data={state.data} openModal={handleOpenModalOrder}/>
+        <BurgerIngredients data={state} openModal={handleCurrentData}/>
+        {state.length && <BurgerConstructor data={state} openModal={handleOpenModalOrder}/>}
         
       </main>
       <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
