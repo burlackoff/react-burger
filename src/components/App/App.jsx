@@ -6,6 +6,7 @@ import style from './App.module.css';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import {body} from '../../utils/constants';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([]);
@@ -15,19 +16,25 @@ function App() {
 
   const handleCurrentData = (data) => {
     setCurrentData(data)
-    setActiveModalIngredient(state => !state)
+    setActiveModalIngredient(state => {
+      if (!state) {body.style.overflow = 'hidden'};
+      return !state
+    })
   }
 
   const handleCloseModalOrder = () => {
     setActiveModalOrder(false)
+    body.style.overflow = 'visible'
   }
 
   const handleOpenModalOrder = () => {
     setActiveModalOrder(true)
+    body.style.overflow = 'hidden'
   }
 
   const handleCloseModalIngredient = () => {
     setActiveModalIngredient(false)
+    body.style.overflow = 'visible'
   }
 
 
