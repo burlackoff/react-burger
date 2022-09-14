@@ -4,7 +4,7 @@ import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './Modal.module.css';
 import PropTypes from 'prop-types';
-import {escape} from '../../utils/constants';
+import {escape, body} from '../../utils/constants';
 
 const modalContainer = document.getElementById("modal");
 
@@ -18,10 +18,12 @@ function Modal({visible, onClose, children, title}) {
     
     if (visible) {
       document.addEventListener('keydown', handleEscapeClose);
+      body.style.overflow = 'hidden';
     }
     
     return () => {
       document.removeEventListener('keydown', handleEscapeClose);
+      body.style.overflow = 'visible';
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible])

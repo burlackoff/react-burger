@@ -6,7 +6,6 @@ import style from './App.module.css';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import {body} from '../../utils/constants';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([]);
@@ -16,25 +15,19 @@ function App() {
 
   const handleCurrentData = (data) => {
     setCurrentData(data)
-    setActiveModalIngredient(state => {
-      if (!state) {body.style.overflow = 'hidden'};
-      return !state
-    })
+    setActiveModalIngredient(state => !state)
   }
 
   const handleCloseModalOrder = () => {
     setActiveModalOrder(false)
-    body.style.overflow = 'visible'
   }
 
   const handleOpenModalOrder = () => {
     setActiveModalOrder(true)
-    body.style.overflow = 'hidden'
   }
 
   const handleCloseModalIngredient = () => {
     setActiveModalIngredient(false)
-    body.style.overflow = 'visible'
   }
 
 
@@ -60,7 +53,7 @@ function App() {
       <main className={style.contentWrapper + ' mb-10'}>
         
         <BurgerIngredients data={ingredients} openModal={handleCurrentData}/>
-        {ingredients.length && <BurgerConstructor data={ingredients} openModal={handleOpenModalOrder}/>}
+        {ingredients.length > 0 && <BurgerConstructor data={ingredients} openModal={handleOpenModalOrder}/>}
         
       </main>
       <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
