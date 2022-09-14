@@ -1,8 +1,2 @@
 @import url("./vendor/normalize.css");
 
-
-.content-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-}

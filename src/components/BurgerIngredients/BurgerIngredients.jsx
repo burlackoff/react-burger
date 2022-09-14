@@ -5,25 +5,25 @@ import Ingredient from '../Ingredient/Ingredient';
 import {ingredientType} from '../../utils/types';
 import PropTypes from 'prop-types';
 
-function BurgerIngredients({data}) {
-  const [current, setCurrent] = React.useState('Булки')
+function BurgerIngredients({data, openModal}) {
+  const [current, setCurrent] = React.useState('one');
 
   return (
     <article className={style.ingredients + ' mt-10'}>
       <h1 className="text text_type_main-large">Соберите бургер</h1>
       <nav className={style.tabs + ' mt-5'}>
         <li>
-          <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
+          <Tab value="one" active={current === 'one'} onClick={setCurrent}>
             Булки
           </Tab>
         </li>
         <li>
-          <Tab value="Соусы" active={current === 'Соусы'} onClick={setCurrent}>
+          <Tab value="two" active={current === 'two'} onClick={setCurrent}>
             Соусы
           </Tab>
         </li>
         <li>
-          <Tab value="Начинки" active={current === 'Начинки'} onClick={setCurrent}>
+          <Tab value="three" active={current === 'three'} onClick={setCurrent}>
             Начинки
           </Tab>
         </li>
@@ -35,7 +35,7 @@ function BurgerIngredients({data}) {
             {data
               .filter((ing) => ing.type === 'bun')
               .map((ing) => (
-                <Ingredient data={ing} key={ing._id}/>
+                <Ingredient data={ing} key={ing._id} openModal={openModal} />
               ))
             }
           </ul>
@@ -46,7 +46,7 @@ function BurgerIngredients({data}) {
           {data
               .filter((ing) => ing.type === 'sauce')
               .map((ing) => (
-                <Ingredient data={ing} key={ing._id}/>
+                <Ingredient data={ing} key={ing._id} openModal={openModal} />
               ))
             }
           </ul>
@@ -57,7 +57,7 @@ function BurgerIngredients({data}) {
           {data
               .filter((ing) => ing.type === 'main')
               .map((ing) => (
-                <Ingredient data={ing} key={ing._id}/>
+                <Ingredient data={ing} key={ing._id} openModal={openModal} />
               ))
             }
           </ul>
@@ -68,7 +68,8 @@ function BurgerIngredients({data}) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientType).isRequired
+  data: PropTypes.arrayOf(ingredientType).isRequired,
+  openModal: PropTypes.func.isRequired
 };
 
 export default BurgerIngredients
