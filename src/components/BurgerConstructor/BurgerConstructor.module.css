@@ -48,3 +48,12 @@
   align-items: center;
   gap: 10px;
 }
+
+.icon {
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.icon:hover {
+  opacity: .5;
+}
