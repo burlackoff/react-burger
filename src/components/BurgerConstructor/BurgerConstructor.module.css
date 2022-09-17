@@ -51,4 +51,9 @@
 
 .icon {
   cursor: pointer;
+  transition: opacity .3s;
+}
+
+.icon:hover {
+  opacity: .5;
 }

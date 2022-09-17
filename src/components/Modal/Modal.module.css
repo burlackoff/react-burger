@@ -28,3 +28,12 @@
   max-width: 520px;
   width: 100%;
 }
+
+.icon {
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.icon:hover {
+  opacity: .5;
+}
