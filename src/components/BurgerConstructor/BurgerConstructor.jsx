@@ -20,7 +20,9 @@ function BurgerConstructor({data, openModal}) {
         <ul className={style.filling}>
           {data.filter((ing) => ing.type !== 'bun').map((ing) => (
             <li key={ing._id} className={style.item + ' pr-2'}>
-              <DragIcon type="primary" />
+              <div className={style.icon}>
+                <DragIcon type="primary" />
+              </div>
               <ConstructorElement
                 text={ing.name}
                 price={ing.price}
