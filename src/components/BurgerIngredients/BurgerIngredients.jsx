@@ -1,9 +1,9 @@
 import React from 'react';
 import style from './BurgerIngredients.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
-import Ingredient from '../Ingredient/Ingredient';
 import {ingredientType} from '../../utils/types';
 import PropTypes from 'prop-types';
+import IngredientsList from '../IngredientsList/IngredientsList';
 
 function BurgerIngredients({data, openModal}) {
   const [current, setCurrent] = React.useState('one');
@@ -29,39 +29,9 @@ function BurgerIngredients({data, openModal}) {
         </li>
       </nav>
       <div className={style.wrapper}>
-        <section className='mt-10'>
-          <h2 className='text text_type_main-medium'>Булки</h2>
-          <ul className={style.list + ' mt-6'}>
-            {data
-              .filter((ing) => ing.type === 'bun')
-              .map((ing) => (
-                <Ingredient data={ing} key={ing._id} openModal={openModal} />
-              ))
-            }
-          </ul>
-        </section>
-        <section className='mt-10'>
-          <h2 className='text text_type_main-medium'>Соусы</h2>
-          <ul className={style.list + ' mt-6'}>
-          {data
-              .filter((ing) => ing.type === 'sauce')
-              .map((ing) => (
-                <Ingredient data={ing} key={ing._id} openModal={openModal} />
-              ))
-            }
-          </ul>
-        </section>
-        <section className='mt-10'>
-          <h2 className='text text_type_main-medium'>Начинки</h2>
-          <ul className={style.list + ' mt-6'}>
-          {data
-              .filter((ing) => ing.type === 'main')
-              .map((ing) => (
-                <Ingredient data={ing} key={ing._id} openModal={openModal} />
-              ))
-            }
-          </ul>
-        </section>
+        <IngredientsList data={data} openModal={openModal} list={'bun'} title={'Булки'}/>
+        <IngredientsList data={data} openModal={openModal} list={'sauce'} title={'Соусы'}/>
+        <IngredientsList data={data} openModal={openModal} list={'main'} title={'Начинки'}/>
       </div>
     </article>
   )
