@@ -1,24 +1,25 @@
 import style from './BurgerConstructor.module.css';
 import {ConstructorElement, DragIcon, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientType} from '../../utils/types';
 import PropTypes from 'prop-types';
+import {IngredientsContext} from '../../services/ingredientsContext';
+import React from 'react';
 
-function BurgerConstructor({data, openModal}) {
-  
+function BurgerConstructor({openModal}) {
+  const {ingredients} = React.useContext(IngredientsContext)
   return (
     <article className={style.constructor + ' pl-4'}>
       <div className={style.itembun + ' pr-4'}>
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={data[0].name + ' (верх)'}
-          price={data[0].price}
-          thumbnail={data[0].image}
+          text={ingredients[0].name + ' (верх)'}
+          price={ingredients[0].price}
+          thumbnail={ingredients[0].image}
         />
       </div>
       <div>
         <ul className={style.filling}>
-          {data.filter((ing) => ing.type !== 'bun').map((ing) => (
+          {ingredients.filter((ing) => ing.type !== 'bun').map((ing) => (
             <li key={ing._id} className={style.item + ' pr-2'}>
               <div className={style.icon}>
                 <DragIcon type="primary" />
@@ -36,9 +37,9 @@ function BurgerConstructor({data, openModal}) {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={data[0].name + ' (низ)'}
-          price={data[0].price}
-          thumbnail={data[0].image}
+          text={ingredients[0].name + ' (низ)'}
+          price={ingredients[0].price}
+          thumbnail={ingredients[0].image}
         />
       </div>
       <div className={style.order + ' mt-10'}>
@@ -55,7 +56,6 @@ function BurgerConstructor({data, openModal}) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingredientType).isRequired,
   openModal: PropTypes.func.isRequired
 };
 

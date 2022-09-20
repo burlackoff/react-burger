@@ -6,6 +6,7 @@ import style from './App.module.css';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import {IngredientsContext} from '../../services/ingredientsContext';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([]);
@@ -52,9 +53,10 @@ function App() {
       <AppHeader />
       <main className={style.contentWrapper + ' mb-10'}>
         
-        <BurgerIngredients data={ingredients} openModal={handleCurrentData}/>
-        {ingredients.length > 0 && <BurgerConstructor data={ingredients} openModal={handleOpenModalOrder}/>}
-        
+          <BurgerIngredients data={ingredients} openModal={handleCurrentData}/>
+          <IngredientsContext.Provider value={{ingredients}}>
+            {ingredients.length > 0 && <BurgerConstructor openModal={handleOpenModalOrder}/>}
+          </IngredientsContext.Provider>
       </main>
       <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
         <IngredientDetails data={currentData}/>
