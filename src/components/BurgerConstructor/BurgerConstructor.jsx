@@ -6,16 +6,10 @@ import React from 'react';
 
 function BurgerConstructor({openModal}) {
   const {ingredients} = React.useContext(IngredientsContext);
-  // eslint-disable-next-line array-callback-return
-  const buns = ingredients.filter((ing) => {if (ing.type === 'bun') return ing});
-
-  
-
 
   return (
     <article className={`${style.constructor} pl-4`}>
       <div className={`${style.itembun} pr-4`}>
-        {console.log(ingredients, buns)}
         <ConstructorElement
           type="top"
           isLocked={true}
@@ -51,7 +45,7 @@ function BurgerConstructor({openModal}) {
       </div>
       <div className={`${style.order} mt-10`}>
         <div className={style.price}>
-          <p className="text text_type_digits-medium">610</p>
+          <p className="text text_type_digits-medium">0</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large" onClick={openModal}>

@@ -51,7 +51,7 @@ function App() {
   return (
     <>
       <AppHeader />
-      <main className={style.contentWrapper + ' mb-10'}>
+      <main className={`${style.contentWrapper} mb-10`}>
         
           <BurgerIngredients data={ingredients} openModal={handleCurrentData}/>
           <IngredientsContext.Provider value={{ingredients}}>
