@@ -5,14 +5,21 @@ import {IngredientsContext} from '../../services/ingredientsContext';
 import React from 'react';
 
 function BurgerConstructor({openModal}) {
-  const {ingredients} = React.useContext(IngredientsContext)
+  const {ingredients} = React.useContext(IngredientsContext);
+  // eslint-disable-next-line array-callback-return
+  const buns = ingredients.filter((ing) => {if (ing.type === 'bun') return ing});
+
+  
+
+
   return (
-    <article className={style.constructor + ' pl-4'}>
-      <div className={style.itembun + ' pr-4'}>
+    <article className={`${style.constructor} pl-4`}>
+      <div className={`${style.itembun} pr-4`}>
+        {console.log(ingredients, buns)}
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={ingredients[0].name + ' (верх)'}
+          text={`${ingredients[0].name} (верх)`}
           price={ingredients[0].price}
           thumbnail={ingredients[0].image}
         />
@@ -20,7 +27,7 @@ function BurgerConstructor({openModal}) {
       <div>
         <ul className={style.filling}>
           {ingredients.filter((ing) => ing.type !== 'bun').map((ing) => (
-            <li key={ing._id} className={style.item + ' pr-2'}>
+            <li key={ing._id} className={`${style.item} pr-2`}>
               <div className={style.icon}>
                 <DragIcon type="primary" />
               </div>
@@ -33,16 +40,16 @@ function BurgerConstructor({openModal}) {
           ))}
         </ul>
       </div>
-      <div className={style.itembun + ' pr-4'}>
+      <div className={`${style.itembun} pr-4`}>
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={ingredients[0].name + ' (низ)'}
+          text={`${ingredients[0].name} (низ)`}
           price={ingredients[0].price}
           thumbnail={ingredients[0].image}
         />
       </div>
-      <div className={style.order + ' mt-10'}>
+      <div className={`${style.order} mt-10`}>
         <div className={style.price}>
           <p className="text text_type_digits-medium">610</p>
           <CurrencyIcon type="primary" />
