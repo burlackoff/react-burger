@@ -5,22 +5,23 @@ import {IngredientsContext} from '../../services/ingredientsContext';
 import React from 'react';
 
 function BurgerConstructor({openModal}) {
-  const {burger} = React.useContext(IngredientsContext);
+  const {ingredients} = React.useContext(IngredientsContext);
+  const price = ingredients.reduce((a, b) => a + b.price, 0);
 
   return (
     <article className={`${style.constructor} pl-4`}>
       <div className={`${style.itembun} pr-4`}>
         <ConstructorElement
-          type="top"S
+          type="top"
           isLocked={true}
-          text={`${burger[0].name} (верх)`}
-          price={burger[0].price}
-          thumbnail={burger[0].image}
+          text={`${ingredients[0].name} (верх)`}
+          price={ingredients[0].price}
+          thumbnail={ingredients[0].image}
         />
       </div>
       <div>
         <ul className={style.filling}>
-          {burger.filter((ing) => ing.type !== 'bun').map((ing) => (
+          {ingredients.filter((ing) => ing.type !== 'bun').map((ing) => (
             <li key={ing._id} className={`${style.item} pr-2`}>
               <div className={style.icon}>
                 <DragIcon type="primary" />
@@ -38,14 +39,14 @@ function BurgerConstructor({openModal}) {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`${burger[0].name} (низ)`}
-          price={burger[0].price}
-          thumbnail={burger[0].image}
+          text={`${ingredients[0].name} (низ)`}
+          price={ingredients[0].price}
+          thumbnail={ingredients[0].image}
         />
       </div>
       <div className={`${style.order} mt-10`}>
         <div className={style.price}>
-          <p className="text text_type_digits-medium">0</p>
+          <p className="text text_type_digits-medium">{price}</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large" onClick={openModal}>

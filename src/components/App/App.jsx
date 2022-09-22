@@ -7,25 +7,12 @@ import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import {IngredientsContext} from '../../services/ingredientsContext';
-import { isBigInt64Array } from 'util/types';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([]);
   const [currentData, setCurrentData] = React.useState({});
   const [activeModalOrder, setActiveModalOrder] = React.useState(false);
-  const [activeModalIngredient, setActiveModalIngredient] = React.useState(false);
-
-  const [burger, setBurger] = React.useState([]);
-
-  const addBurger = (ingredient) => {
-    if (burger.includes(ingredient)) {
-      setBurger([...burger])
-    } else if (ingredient.type !== 'bun') {
-      setBurger([...burger, ingredient])
-    } else if (ingredient.type === 'bun' && !burger.includes(ingredient)) {
-      setBurger([ingredient, ...burger, ingredient])
-    }
-  }
+  const [activeModalIngredient, setActiveModalIngredient] = React.useState(false)
 
   const handleCurrentData = (data) => {
     setCurrentData(data)
@@ -65,11 +52,10 @@ function App() {
     <>
       <AppHeader />
       <main className={`${style.contentWrapper} mb-10`}>
-        
-          <BurgerIngredients data={ingredients} openModal={handleCurrentData}/>
-          <IngredientsContext.Provider value={{burger}}>
-            {ingredients.length > 0 && <BurgerConstructor openModal={handleOpenModalOrder}/>}
-          </IngredientsContext.Provider>
+        <BurgerIngredients data={ingredients} openModal={handleCurrentData}/>
+        <IngredientsContext.Provider value={{ingredients}}>
+          {ingredients.length > 0 && <BurgerConstructor openModal={handleOpenModalOrder}/>}
+        </IngredientsContext.Provider>
       </main>
       <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
         <IngredientDetails data={currentData}/>
