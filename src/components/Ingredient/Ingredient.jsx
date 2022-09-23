@@ -10,8 +10,8 @@ function Ingredient({data, openModal}) {
   return (
     <>
       <li className={style.ingredient} onClick={() => openModal(data)}>
-        <img src={data.image} alt={data.name} className={style.image + ' pr-4 pl-4'}/>
-        <div className={style.price + ' mt-1 pr-4 pl-4'}>
+        <img src={data.image} alt={data.name} className={`${style.image} pr-4 pl-4`}/>
+        <div className={`${style.price} mt-1 pr-4 pl-4`}>
           <p className='text text_type_digits-default'>{data.price}</p>
           <CurrencyIcon type="primary" />
         </div>

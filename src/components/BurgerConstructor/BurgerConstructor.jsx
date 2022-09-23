@@ -13,7 +13,7 @@ function BurgerConstructor({openModal}) {
 
   return (
     <article className={`${style.constructor} pl-4`}>
-      <div className={`${style.itemBun} pr-4`}>
+      <div className={`${style.item_bun} pr-4`}>
         <ConstructorElement
           type="top"
           isLocked={true}
@@ -38,7 +38,7 @@ function BurgerConstructor({openModal}) {
           ))}
         </ul>
       </div>
-      <div className={`${style.itemBun} pr-4`}>
+      <div className={`${style.item_bun} pr-4`}>
         <ConstructorElement
           type="bottom"
           isLocked={true}

@@ -32,7 +32,7 @@ function Modal({visible, onClose, children, title}) {
     (
       <ModalOverlay visible={visible} onClose={onClose} >
         <div className={style.modal}>
-          <div className={style.titleBox}>
+          <div className={style.title_box}>
             <h2 className='text text_type_main-large'>
               {title}
             </h2>

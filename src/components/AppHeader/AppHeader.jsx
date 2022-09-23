@@ -6,9 +6,9 @@ import NavLink from '../NavLink/NavLink';
 function AppHeader() {
   return (
       <header className={style.header}>
-        <div className={style.content + ' m-4'} >
+        <div className={`${style.content} m-4`} >
           <nav>
-            <ul className={style.navlist}>
+            <ul className={style.nav_list}>
               <li>
                 <NavLink text={"Конструктор"} className="p-4 m-4" icon={<BurgerIcon type="primary" />} />
               </li>
@@ -21,7 +21,7 @@ function AppHeader() {
             <Logo/>
           </div>
           <nav>
-            <ul className={style.navlist}>
+            <ul className={style.nav_list}>
               <li>
                 <NavLink text={"Личный кабинет"} className="p-4 m-4" icon={<ProfileIcon type="secondary" />} type="secondary" />
               </li>
