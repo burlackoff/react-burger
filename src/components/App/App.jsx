@@ -47,9 +47,13 @@ function App() {
     <>
       <AppHeader />
       <main className={`${style.contentWrapper} mb-10`}>
-        <BurgerIngredients data={ingredients} openModal={handleCurrentData}/>
         <IngredientsContext.Provider value={{ingredients}}>
-          {ingredients.length > 0 && <BurgerConstructor openModal={handleOpenModalOrder}/>}
+          {ingredients.length > 0 && (
+            <>
+              <BurgerIngredients openModal={handleCurrentData}/>
+              <BurgerConstructor openModal={handleOpenModalOrder}/>
+            </>
+          )}
         </IngredientsContext.Provider>
       </main>
       <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>

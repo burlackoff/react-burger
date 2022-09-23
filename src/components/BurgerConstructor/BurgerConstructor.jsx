@@ -6,22 +6,25 @@ import React from 'react';
 
 function BurgerConstructor({openModal}) {
   const {ingredients} = React.useContext(IngredientsContext);
-  const price = ingredients.reduce((a, b) => a + b.price, 0);
+  const bun = React.useMemo(() => ingredients.find(ingredient => ingredient.type === 'bun'), [ingredients]);
+  const ingredientsWithoutBun = React.useMemo(() => ingredients.filter(ingredient => ingredient.type !== 'bun'), [ingredients]);
+  
+  const price = React.useMemo(() => bun.price * 2 + ingredientsWithoutBun.reduce((a, b) => a + b.price, 0), [bun, ingredientsWithoutBun]);
 
   return (
     <article className={`${style.constructor} pl-4`}>
-      <div className={`${style.itembun} pr-4`}>
+      <div className={`${style.itemBun} pr-4`}>
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={`${ingredients[0].name} (верх)`}
-          price={ingredients[0].price}
-          thumbnail={ingredients[0].image}
+          text={`${bun.name} (верх)`}
+          price={bun.price}
+          thumbnail={bun.image}
         />
       </div>
       <div>
         <ul className={style.filling}>
-          {ingredients.filter((ing) => ing.type !== 'bun').map((ing) => (
+          {ingredientsWithoutBun.map((ing) => (
             <li key={ing._id} className={`${style.item} pr-2`}>
               <div className={style.icon}>
                 <DragIcon type="primary" />
@@ -35,13 +38,13 @@ function BurgerConstructor({openModal}) {
           ))}
         </ul>
       </div>
-      <div className={`${style.itembun} pr-4`}>
+      <div className={`${style.itemBun} pr-4`}>
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={`${ingredients[0].name} (низ)`}
-          price={ingredients[0].price}
-          thumbnail={ingredients[0].image}
+          text={`${bun.name} (низ)`}
+          price={bun.price}
+          thumbnail={bun.image}
         />
       </div>
       <div className={`${style.order} mt-10`}>
