@@ -9,7 +9,7 @@ function ModalOverlay(props) {
   }
 
   return (
-      <div className={visible ? `${style.modal} + ${style.modalActive}` : `${style.modal}`} onClick={handleOverlayClose}>
+      <div className={visible ? `${style.modal} + ${style.modal_active}` : `${style.modal}`} onClick={handleOverlayClose}>
         {children}
       </div>
   );

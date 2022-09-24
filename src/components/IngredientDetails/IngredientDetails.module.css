@@ -3,7 +3,7 @@
   height: 240px;
 }
 
-.infoList {
+.info_list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -14,7 +14,7 @@
   width: 100%;
 }
 
-.infoItem {
+.info_item {
   max-width: 120px;
   width: 100%;
   display: flex;

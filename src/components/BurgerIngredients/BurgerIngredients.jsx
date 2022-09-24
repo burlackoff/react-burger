@@ -1,17 +1,16 @@
 import React from 'react';
 import style from './BurgerIngredients.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientType} from '../../utils/types';
 import PropTypes from 'prop-types';
 import IngredientsList from '../IngredientsList/IngredientsList';
 
-function BurgerIngredients({data, openModal}) {
+function BurgerIngredients({openModal}) {
   const [current, setCurrent] = React.useState('one');
-
+  
   return (
-    <article className={style.ingredients + ' mt-10'}>
+    <article className={`${style.ingredients} mt-10`}>
       <h1 className="text text_type_main-large">Соберите бургер</h1>
-      <nav className={style.tabs + ' mt-5'}>
+      <nav className={`${style.tabs} mt-5`}>
         <li>
           <Tab value="one" active={current === 'one'} onClick={setCurrent}>
             Булки
@@ -29,16 +28,15 @@ function BurgerIngredients({data, openModal}) {
         </li>
       </nav>
       <div className={style.wrapper}>
-        <IngredientsList data={data} openModal={openModal} list={'bun'} title={'Булки'}/>
-        <IngredientsList data={data} openModal={openModal} list={'sauce'} title={'Соусы'}/>
-        <IngredientsList data={data} openModal={openModal} list={'main'} title={'Начинки'}/>
+        <IngredientsList openModal={openModal} list={'bun'} title={'Булки'}/>
+        <IngredientsList openModal={openModal} list={'sauce'} title={'Соусы'}/>
+        <IngredientsList openModal={openModal} list={'main'} title={'Начинки'}/>
       </div>
     </article>
   )
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientType).isRequired,
   openModal: PropTypes.func.isRequired
 };
 

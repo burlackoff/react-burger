@@ -1,25 +1,31 @@
 import style from './BurgerConstructor.module.css';
 import {ConstructorElement, DragIcon, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
-import {ingredientType} from '../../utils/types';
 import PropTypes from 'prop-types';
+import {IngredientsContext} from '../../services/ingredientsContext';
+import React from 'react';
 
-function BurgerConstructor({data, openModal}) {
+function BurgerConstructor({openModal}) {
+  const {ingredients} = React.useContext(IngredientsContext);
+  const bun = React.useMemo(() => ingredients.find(ingredient => ingredient.type === 'bun'), [ingredients]);
+  const ingredientsWithoutBun = React.useMemo(() => ingredients.filter(ingredient => ingredient.type !== 'bun'), [ingredients]);
   
+  const price = React.useMemo(() => bun.price * 2 + ingredientsWithoutBun.reduce((a, b) => a + b.price, 0), [bun, ingredientsWithoutBun]);
+
   return (
-    <article className={style.constructor + ' pl-4'}>
-      <div className={style.itembun + ' pr-4'}>
+    <article className={`${style.constructor} pl-4`}>
+      <div className={`${style.item_bun} pr-4`}>
         <ConstructorElement
           type="top"
           isLocked={true}
-          text={data[0].name + ' (верх)'}
-          price={data[0].price}
-          thumbnail={data[0].image}
+          text={`${bun.name} (верх)`}
+          price={bun.price}
+          thumbnail={bun.image}
         />
       </div>
       <div>
         <ul className={style.filling}>
-          {data.filter((ing) => ing.type !== 'bun').map((ing) => (
-            <li key={ing._id} className={style.item + ' pr-2'}>
+          {ingredientsWithoutBun.map((ing) => (
+            <li key={ing._id} className={`${style.item} pr-2`}>
               <div className={style.icon}>
                 <DragIcon type="primary" />
               </div>
@@ -32,18 +38,18 @@ function BurgerConstructor({data, openModal}) {
           ))}
         </ul>
       </div>
-      <div className={style.itembun + ' pr-4'}>
+      <div className={`${style.item_bun} pr-4`}>
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text={data[0].name + ' (низ)'}
-          price={data[0].price}
-          thumbnail={data[0].image}
+          text={`${bun.name} (низ)`}
+          price={bun.price}
+          thumbnail={bun.image}
         />
       </div>
-      <div className={style.order + ' mt-10'}>
+      <div className={`${style.order} mt-10`}>
         <div className={style.price}>
-          <p className="text text_type_digits-medium">610</p>
+          <p className="text text_type_digits-medium">{price}</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large" onClick={openModal}>
@@ -55,7 +61,6 @@ function BurgerConstructor({data, openModal}) {
 }
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingredientType).isRequired,
   openModal: PropTypes.func.isRequired
 };
 
