@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import {GET_INGREDIENTS} from '../actions/index';
+import {GET_INGREDIENTS, GET_BURGER_INGREDIENTS} from '../actions/index';
 
 const initialState = {
   success: false,
@@ -20,7 +20,23 @@ const getIngredietnsApi = (state = initialState, action) => {
   }
 }
 
+const getBurger = (state = [], action) => {
+  switch (action.type) {
+    case GET_BURGER_INGREDIENTS:
+      return [
+        ...state,
+        action.data
+      ]
+      default: 
+      return [
+        ...state
+      ]
+  }
+}
+
+
 
 export const rootReducer = combineReducers({
-  ingredients: getIngredietnsApi
+  ingredients: getIngredietnsApi,
+  burgerIngredients: getBurger,
 })

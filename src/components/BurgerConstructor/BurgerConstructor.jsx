@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {useSelector} from 'react-redux';
 
 function BurgerConstructor({openModal}) {
-  const ingredients = useSelector(store => store.ingredients.data);
+  const ingredients = useSelector(store => store.burgerIngredients)
 
   const bun = ingredients.length > 0 && ingredients.find(ingredient => ingredient.type === 'bun');
   const price = ingredients.length > 0 && bun.price * 2 + ingredients.filter(ing => ing.type !== 'bun').reduce((a, b) => a + b.price, 0);
