@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import {GET_INGREDIENTS, GET_BURGER_INGREDIENTS, ADD_INGREDIENT_DETAILS, DELETE_INGREDIENT_DETAILS} from '../actions/index';
+import {GET_INGREDIENTS, GET_BURGER_INGREDIENTS, ADD_INGREDIENT_DETAILS, DELETE_INGREDIENT_DETAILS, SET_ORDER} from '../actions/index';
 
 const initialState = {
   success: false,
@@ -57,8 +57,22 @@ const getIngredientDetail = (state = initialStateDetails, action) => {
   }
 }
 
+const getOrder = (state = [], action) => {
+  switch (action.type) {
+    case SET_ORDER:
+      return [
+        ...state,
+        action.numbers
+      ]
+    default:
+      return [...state]
+  }
+}
+
+
 export const rootReducer = combineReducers({
   ingredients: getIngredietnsApi,
   burgerIngredients: getBurger,
   ingredientDetail: getIngredientDetail,
+  order: getOrder
 })
