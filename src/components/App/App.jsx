@@ -6,11 +6,14 @@ import style from './App.module.css';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import {IngredientsContext} from '../../services/ingredientsContext';
 import {getIngredients, setOrder} from '../../utils/api';
+import {GET_INGREDIENTS} from '../../services/actions/index.js';
+import {useSelector, useDispatch} from 'react-redux';
 
 function App() {
-  const [ingredients, setIngredients] = React.useState([]);
+  const {ingredients} = useSelector(store => store);
+  const dispatch = useDispatch();
+  
   const [currentData, setCurrentData] = React.useState({});
   const [activeModalOrder, setActiveModalOrder] = React.useState(false);
   const [activeModalIngredient, setActiveModalIngredient] = React.useState(false);
@@ -36,25 +39,19 @@ function App() {
     setActiveModalIngredient(false)
   }
 
-
   React.useEffect(() => {
     getIngredients()
-      .then(response => setIngredients(response.data))
-      .catch(err => console.error(err))
+    .then(res => dispatch({type: GET_INGREDIENTS, data: res.data}))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
 
   return (
     <>
       <AppHeader />
       <main className={`${style.contentWrapper} mb-10`}>
-        <IngredientsContext.Provider value={{ingredients}}>
-          {ingredients.length > 0 && (
-            <>
-              <BurgerIngredients openModal={handleCurrentData}/>
-              <BurgerConstructor openModal={handleOpenModalOrder}/>
-            </>
-          )}
-        </IngredientsContext.Provider>
+        <BurgerIngredients openModal={handleCurrentData}/>
+        <BurgerConstructor openModal={handleOpenModalOrder}/>
       </main>
       <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
         <IngredientDetails data={currentData}/>

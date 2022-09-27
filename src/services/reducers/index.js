@@ -1,19 +1,17 @@
 import { combineReducers } from "redux";
-import {GET_INGREDIENTS} from '../../utils/constants';
+import {GET_INGREDIENTS} from '../actions/index';
 
 const initialState = {
-  ingredients: [],
-  ingredientsBurger: {},
-  ingredientDetails: {},
-  order: {}
-};
+  success: false,
+  data: []
+}
 
-const getIngredietns = (state = initialState, action) => {
+const getIngredietnsApi = (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS: 
       return {
         ...state,
-        ingredients: [action.data]
+        data: action.data
       }
       default:
         return {
@@ -23,4 +21,6 @@ const getIngredietns = (state = initialState, action) => {
 }
 
 
-export const rootReducer = combineReducers({getIngredietns})
+export const rootReducer = combineReducers({
+  ingredients: getIngredietnsApi
+})
