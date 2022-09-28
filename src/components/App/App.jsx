@@ -10,9 +10,8 @@ import {setOrderApi} from '../../utils/api';
 import {useSelector, useDispatch} from 'react-redux';
 import {getIngredients} from '../../services/actions/getIngredients';
 
-
 function App() {
-  const ingredients = useSelector(store => store.data);
+  const ingredients = useSelector(store => store.ingredients.data);
   const dispatch = useDispatch();
   const [currentData, setCurrentData] = React.useState({});
   const [activeModalOrder, setActiveModalOrder] = React.useState(false);
@@ -43,7 +42,7 @@ function App() {
   React.useEffect(() => {
     dispatch(getIngredients())
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [dispatch])
 
 
   return (
