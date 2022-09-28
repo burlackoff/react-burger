@@ -7,18 +7,18 @@ function checkResponse(res) {
   return Promise.reject(`Ошибка ${res}`)
 }
 
-export function getIngredientsApi() {
-  return fetch(`${url}ingredients`)
-    .then(res=> checkResponse(res))
+export async function getIngredientsApi() {
+  const res = await fetch(`${url}ingredients`);
+  return checkResponse(res);
 }
 
-export function setOrderApi(ingredients) {
-  return fetch(`${url}orders`, {
+export async function setOrderApi(ingredients) {
+  const res = await fetch(`${url}orders`, {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       'ingredients': ingredients,
     }),
-  })
-  .then(res=> checkResponse(res))
+  });
+  return checkResponse(res);
 }
