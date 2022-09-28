@@ -6,14 +6,14 @@ import style from './App.module.css';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import {getIngredients, setOrder} from '../../utils/api';
-import {GET_INGREDIENTS} from '../../services/actions/index.js';
+import {setOrderApi} from '../../utils/api';
 import {useSelector, useDispatch} from 'react-redux';
+import {getIngredients} from '../../services/actions/getIngredients';
+
 
 function App() {
-  const {ingredients} = useSelector(store => store);
+  const ingredients = useSelector(store => store.data);
   const dispatch = useDispatch();
-  
   const [currentData, setCurrentData] = React.useState({});
   const [activeModalOrder, setActiveModalOrder] = React.useState(false);
   const [activeModalIngredient, setActiveModalIngredient] = React.useState(false);
@@ -30,7 +30,7 @@ function App() {
 
   const handleOpenModalOrder = () => {
     setActiveModalOrder(true)
-    setOrder(ingredients.map(ing => ing._id))
+    setOrderApi(ingredients.map(ing => ing._id))
       .then(res => setOrderState(res.order.number))
       .catch(err => console.error(err))
   }
@@ -39,9 +39,9 @@ function App() {
     setActiveModalIngredient(false)
   }
 
+
   React.useEffect(() => {
-    getIngredients()
-    .then(res => dispatch({type: GET_INGREDIENTS, data: res.data}))
+    dispatch(getIngredients())
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

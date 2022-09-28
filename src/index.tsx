@@ -3,12 +3,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import App from './components/App/App';
 import { rootReducer } from './services/reducers';
-import { legacy_createStore as createStore} from 'redux';
+import { legacy_createStore as createStore, applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
-const composeEnhancers = composeWithDevTools({})
-const store = createStore(rootReducer, composeEnhancers());
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

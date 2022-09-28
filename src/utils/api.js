@@ -7,12 +7,12 @@ function checkResponse(res) {
   return Promise.reject(`Ошибка ${res}`)
 }
 
-export function getIngredients() {
+export function getIngredientsApi() {
   return fetch(`${url}ingredients`)
     .then(res=> checkResponse(res))
 }
 
-export function setOrder(ingredients) {
+export function setOrderApi(ingredients) {
   return fetch(`${url}orders`, {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
