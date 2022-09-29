@@ -9,11 +9,11 @@ export function setOrder(arr) {
     dispatch({
       type: SET_ORDER
     })
-
     setOrderApi(arr).then(res => {
       if (res && res.success) {
         dispatch({
           type: SET_ORDER_SUCCESS,
+          order: res.order.number
         })
       } else {
         dispatch({

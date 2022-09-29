@@ -9,14 +9,24 @@ const initialState = {
 export const setOrderReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_ORDER:
-      return [
+      return {
         ...state,
-        action.numbers
-      ]
-    case SET_ORDER_FAILED:
-      return []
-    case SET_ORDER_SUCCESS: 
-      return []
+        orderRequest: true,
+        orderFailed: false
+      }
+    case SET_ORDER_SUCCESS:
+      return {
+        ...state,
+        orderRequest: false,
+        orderFailed: false,
+        order: action.order
+      }
+    case SET_ORDER_FAILED: 
+      return {
+        ...state,
+        orderRequest: false,
+        orderFailed: true
+      }
     default:
       return state
   }
