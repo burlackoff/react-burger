@@ -9,18 +9,13 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import {useSelector, useDispatch} from 'react-redux';
 import {getIngredients} from '../../services/actions/getIngredients';
 import {setOrder} from '../../services/actions/setOrder';
+import {DELETE_INGREDIENT_DETAILS} from '../../services/actions/showIngredientDetails';
 
 function App() {
   const ingredients = useSelector(store => store.ingredients.data);
+  const activeModalIngredient = useSelector(store => store.ingredientDetail.active);
   const dispatch = useDispatch();
-  const [currentData, setCurrentData] = React.useState({});
   const [activeModalOrder, setActiveModalOrder] = React.useState(false);
-  const [activeModalIngredient, setActiveModalIngredient] = React.useState(false);
-
-  const handleCurrentData = (data) => {
-    setCurrentData(data)
-    setActiveModalIngredient(state => !state)
-  }
 
   const handleCloseModalOrder = () => {
     setActiveModalOrder(false)
@@ -32,9 +27,8 @@ function App() {
   }
 
   const handleCloseModalIngredient = () => {
-    setActiveModalIngredient(false)
+    dispatch({type: DELETE_INGREDIENT_DETAILS})
   }
-
 
   React.useEffect(() => {
     dispatch(getIngredients())
@@ -46,11 +40,11 @@ function App() {
     <>
       <AppHeader />
       <main className={`${style.contentWrapper} mb-10`}>
-        <BurgerIngredients openModal={handleCurrentData}/>
+        <BurgerIngredients/>
         <BurgerConstructor openModal={handleOpenModalOrder}/>
       </main>
       <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
-        <IngredientDetails data={currentData}/>
+        <IngredientDetails/>
       </Modal>
       <Modal onClose={handleCloseModalOrder} visible={activeModalOrder} >
         <OrderDetails/>
