@@ -7,7 +7,7 @@ function IngredientsList({list, title}) {
   const ingredients = useSelector(store => store.ingredients.data);
 
   return (
-    <section className='mt-10'>
+    <section className='mt-10' id={`${list}`}>
       <h2 className='text text_type_main-medium'>{title}</h2>
       <ul className={`${style.list} mt-6`}>
         {ingredients.length > 0 && ingredients
