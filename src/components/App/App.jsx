@@ -10,6 +10,8 @@ import {useSelector, useDispatch} from 'react-redux';
 import {getIngredients} from '../../services/actions/getIngredients';
 import {setOrder} from '../../services/actions/setOrder';
 import {DELETE_INGREDIENT_DETAILS} from '../../services/actions/showIngredientDetails';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const ingredients = useSelector(store => store.ingredients.data);
@@ -39,10 +41,12 @@ function App() {
   return (
     <>
       <AppHeader />
-      <main className={`${style.contentWrapper} mb-10`}>
-        <BurgerIngredients/>
-        <BurgerConstructor openModal={handleOpenModalOrder}/>
-      </main>
+      <DndProvider backend={HTML5Backend}>
+        <main className={`${style.contentWrapper} mb-10`}>
+          <BurgerIngredients/>
+          <BurgerConstructor openModal={handleOpenModalOrder}/>
+        </main>
+      </DndProvider>
       <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
         <IngredientDetails/>
       </Modal>
