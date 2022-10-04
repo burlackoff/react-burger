@@ -11,7 +11,7 @@ function Ingredient({data}) {
   const dispatch = useDispatch();
   const [, dragRef] = useDrag({
     type: 'ingredient',
-    item: {},
+    item: data,
   });
 
   return (

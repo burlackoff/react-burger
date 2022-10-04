@@ -1,12 +1,16 @@
 import {GET_BURGER_INGREDIENTS} from '../actions/currentBurger';
 
-export const currentBurgerReducer = (state = [], action) => {
+const initialState = {
+  ingredients: [],
+}
+
+export const currentBurgerReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_BURGER_INGREDIENTS:
-      return [
+      return {
         ...state,
-        action.data
-      ]
+        ingredients: [...state.ingredients, action.data]
+      }
     default: 
       return state
   }
