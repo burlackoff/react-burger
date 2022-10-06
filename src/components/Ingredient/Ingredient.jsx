@@ -1,18 +1,30 @@
 import style from './Ingredient.module.css';
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
 import {ingredientType} from '../../utils/types';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ADD_INGREDIENT_DETAILS} from '../../services/actions/showIngredientDetails';
+import {GET_BURGER_INGREDIENTS, GET_BURGER_BUN} from '../../services/actions/currentBurger';
 import { useDrag } from 'react-dnd';
 
 function Ingredient({data}) {
-  const [count, setCount] = React.useState(0);
+  const {ingredients} = useSelector(store => store.burgerIngredients)
   const dispatch = useDispatch();
   const [, dragRef] = useDrag({
     type: 'ingredient',
-    item: data,
+    item: data._id,
+    end: () => {
+      setAction()
+    }
   });
+
+  const setAction = () => {
+    data.type === 'bun' ? 
+    dispatch({type: GET_BURGER_BUN, data: data}) 
+    : 
+    dispatch({type: GET_BURGER_INGREDIENTS, data: data}); 
+  }
+
+  const counter = ingredients.filter((item) => item._id === data._id).length
 
   return (
     <>
@@ -23,7 +35,7 @@ function Ingredient({data}) {
           <CurrencyIcon type="primary" />
         </div>
         <p className='text text_type_main-default mt-1'>{data.name}</p>
-        <Counter count={count} size="default" onClick={setCount} className={style.count} />
+        {counter !== 0 ? <Counter count={counter} size="default" className={style.count} /> : <></>}
       </li>
     </>
   )

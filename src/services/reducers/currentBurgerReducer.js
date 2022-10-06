@@ -1,7 +1,8 @@
-import {GET_BURGER_INGREDIENTS} from '../actions/currentBurger';
+import {GET_BURGER_INGREDIENTS, GET_BURGER_BUN} from '../actions/currentBurger';
 
 const initialState = {
   ingredients: [],
+  bun: {}
 }
 
 export const currentBurgerReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ export const currentBurgerReducer = (state = initialState, action) => {
         ...state,
         ingredients: [...state.ingredients, action.data]
       }
+    case GET_BURGER_BUN:
+      return {
+        ...state,
+        bun: action.data
+      }  
     default: 
       return state
   }
