@@ -1,24 +1,29 @@
 import style from './BurgerConstructor.module.css';
 import {ConstructorElement, DragIcon, Button, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
+import {GET_BURGER_INGREDIENTS, GET_BURGER_BUN} from '../../services/actions/currentBurger';
 
 function BurgerConstructor({openModal}) {
   const {ingredients} = useSelector(store => store.burgerIngredients);
   const {bun} = useSelector(store => store.burgerIngredients);
+  const dispatch = useDispatch();
 
   const [{isHover}, dropRef] = useDrop({
     accept: 'ingredient',
+    drop(item) {
+      if (item.type === 'bun') {dispatch({type: GET_BURGER_BUN, data: item})}
+      else {dispatch({type: GET_BURGER_INGREDIENTS, data: item})}
+    },
     collect: monitor => ({
       isHover: monitor.isOver()
     })
   })
 
   const borderColor = isHover ? 'lightgreen' : 'transparent';
-  console.log(Object.keys(bun).length !== 0);
 
-  let price = ingredients.length > 0 && bun.price * 2 + ingredients.filter(ing => ing.type !== 'bun').reduce((acc, item) => acc + item.price, 0);
+  const price = ingredients.length > 0 && bun.price * 2 + ingredients.reduce((acc, item) => acc + item.price, 0);
   
   return (
     <>

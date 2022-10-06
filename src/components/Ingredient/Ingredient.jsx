@@ -3,7 +3,6 @@ import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-com
 import {ingredientType} from '../../utils/types';
 import {useDispatch, useSelector} from 'react-redux';
 import {ADD_INGREDIENT_DETAILS} from '../../services/actions/showIngredientDetails';
-import {GET_BURGER_INGREDIENTS, GET_BURGER_BUN} from '../../services/actions/currentBurger';
 import { useDrag } from 'react-dnd';
 
 function Ingredient({data}) {
@@ -11,24 +10,18 @@ function Ingredient({data}) {
   const dispatch = useDispatch();
   const [, dragRef] = useDrag({
     type: 'ingredient',
-    item: data._id,
-    end: () => {
-      setAction()
-    }
+    item: data,
   });
 
-  const setAction = () => {
-    data.type === 'bun' ? 
-    dispatch({type: GET_BURGER_BUN, data: data}) 
-    : 
-    dispatch({type: GET_BURGER_INGREDIENTS, data: data}); 
+  const openModal = () => {
+    dispatch({type: ADD_INGREDIENT_DETAILS, ingredient: data})
   }
 
   const counter = ingredients.filter((item) => item._id === data._id).length
 
   return (
     <>
-      <li className={style.ingredient} draggable ref={dragRef} onClick={() => dispatch({type: ADD_INGREDIENT_DETAILS, ingredient: data})}>
+      <li className={style.ingredient} draggable ref={dragRef} onClick={() => openModal()}>
         <img src={data.image} alt={data.name} className={`${style.image} pr-4 pl-4`} />
         <div className={`${style.price} mt-1 pr-4 pl-4`}>
           <p className='text text_type_digits-default'>{data.price}</p>
