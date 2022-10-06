@@ -6,7 +6,8 @@ import {ADD_INGREDIENT_DETAILS} from '../../services/actions/showIngredientDetai
 import { useDrag } from 'react-dnd';
 
 function Ingredient({data}) {
-  const {ingredients} = useSelector(store => store.burgerIngredients)
+  const {ingredients} = useSelector(store => store.burgerIngredients);
+  const {bun} = useSelector(store => store.burgerIngredients);
   const dispatch = useDispatch();
   const [, dragRef] = useDrag({
     type: 'ingredient',
@@ -17,8 +18,14 @@ function Ingredient({data}) {
     dispatch({type: ADD_INGREDIENT_DETAILS, ingredient: data})
   }
 
-  const counter = ingredients.filter((item) => item._id === data._id).length
-
+  const setCounter = () => {
+    if (data.type !== 'bun') {
+      return ingredients.filter((item) => item._id === data._id).length
+    } else if (JSON.stringify(bun) === JSON.stringify(data)) {
+      return 2
+    } else return 0
+  }
+  
   return (
     <>
       <li className={style.ingredient} draggable ref={dragRef} onClick={() => openModal()}>
@@ -28,7 +35,7 @@ function Ingredient({data}) {
           <CurrencyIcon type="primary" />
         </div>
         <p className='text text_type_main-default mt-1'>{data.name}</p>
-        {counter !== 0 ? <Counter count={counter} size="default" className={style.count} /> : <></>}
+        {setCounter() !== 0 ? <Counter count={setCounter()} size="default" className={style.count} /> : <></>}
       </li>
     </>
   )
