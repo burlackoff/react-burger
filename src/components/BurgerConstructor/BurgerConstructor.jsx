@@ -3,7 +3,7 @@ import {ConstructorElement, DragIcon, Button, CurrencyIcon} from '@ya.praktikum/
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import {GET_BURGER_INGREDIENTS, GET_BURGER_BUN} from '../../services/actions/currentBurger';
+import {GET_BURGER_INGREDIENTS, GET_BURGER_BUN, DELETE_BURGER_INGREDIENT} from '../../services/actions/currentBurger';
 
 function BurgerConstructor({openModal}) {
   const {ingredients} = useSelector(store => store.burgerIngredients);
@@ -48,7 +48,7 @@ function BurgerConstructor({openModal}) {
 
           {ingredients.length > 0 ?
           <ul className={style.filling}>
-            {ingredients.filter(ing => ing.type !== 'bun').map((ing, index) => (
+            {ingredients.map((ing, index) => (
               <li key={index} className={`${style.item} pr-2`}>
                 <div className={style.icon}>
                   <DragIcon type="primary" />
@@ -57,6 +57,7 @@ function BurgerConstructor({openModal}) {
                   text={ing.name}
                   price={ing.price}
                   thumbnail={ing.image}
+                  handleClose={() => dispatch({type: DELETE_BURGER_INGREDIENT, index: index})}
                 />
               </li>
             ))}
