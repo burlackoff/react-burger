@@ -32,12 +32,6 @@
   justify-content: end;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .order {
   display: flex;
   justify-content: end;
@@ -48,15 +42,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.icon {
-  cursor: pointer;
-  transition: opacity .3s;
-}
-
-.icon:hover {
-  opacity: .5;
 }
 
 .title {
