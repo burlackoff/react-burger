@@ -34,6 +34,7 @@ function BurgerConstructor({openModal}) {
     newIngredients[dragIndex] = hoverItem;
     newIngredients[hoverIndex] = dragItem;
     dispatch({type: SORTED_BURGER_INGREDIENTS, sorted: newIngredients});
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ingredients])
 
   const renderIngredients = (ing, index) => {
