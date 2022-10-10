@@ -1,13 +1,13 @@
 import {getIngredientsApi} from '../../utils/api';
 
-export const GET_INGREDIENTS = 'GET_INGREDIENTS';
-export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
+export const GET_INGREDIENTS_REQUEST = 'GET_INGREDIENTS_REQUEST';
+export const GET_INGREDIENTS_ERROR = 'GET_INGREDIENTS_ERROR';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 
 export function getIngredients() {
   return function(dispatch) {
     dispatch({
-      type: GET_INGREDIENTS
+      type: GET_INGREDIENTS_REQUEST
     })
 
     getIngredientsApi().then(res => {
@@ -18,7 +18,7 @@ export function getIngredients() {
         })
       } else {
         dispatch({
-          type: GET_INGREDIENTS_FAILED
+          type: GET_INGREDIENTS_ERROR
         })
       }
     })

@@ -1,13 +1,13 @@
 import { setOrderApi } from "../../utils/api";
 
-export const SET_ORDER = 'SET_ORDER';
-export const SET_ORDER_FAILED = 'SET_ORDER_FAILED';
+export const SET_ORDER_REQUEST = 'SET_ORDER_REQUEST';
+export const SET_ORDER_ERROR = 'SET_ORDER_ERROR';
 export const SET_ORDER_SUCCESS = 'SET_ORDER_SUCCESS';
 
 export function setOrder(arr) {
   return function(dispatch) {
     dispatch({
-      type: SET_ORDER
+      type: SET_ORDER_REQUEST
     })
     setOrderApi(arr).then(res => {
       if (res && res.success) {
@@ -17,7 +17,7 @@ export function setOrder(arr) {
         })
       } else {
         dispatch({
-          type: SET_ORDER_FAILED
+          type: SET_ORDER_ERROR
         })
       }
     })

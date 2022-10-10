@@ -1,4 +1,4 @@
-import {GET_INGREDIENTS, GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS} from '../actions/getIngredients';
+import {GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_ERROR, GET_INGREDIENTS_SUCCESS} from '../actions/getIngredients';
 
 const initialState = {
   dataRequest: false,
@@ -9,7 +9,7 @@ const initialState = {
 
 export const ingredientsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_INGREDIENTS: 
+    case GET_INGREDIENTS_REQUEST: 
       return {
         ...state,
         dataRequest: true,
@@ -22,7 +22,7 @@ export const ingredientsReducer = (state = initialState, action) => {
         dataRequest: false,
         dataFailed: false
       }
-    case GET_INGREDIENTS_FAILED: 
+    case GET_INGREDIENTS_ERROR: 
       return {
         ...state,
         dataRequest: false,

@@ -1,4 +1,4 @@
-import {SET_ORDER, SET_ORDER_FAILED, SET_ORDER_SUCCESS} from '../actions/setOrder';
+import {SET_ORDER_REQUEST, SET_ORDER_ERROR, SET_ORDER_SUCCESS} from '../actions/setOrder';
 
 const initialState = {
   order: 0,
@@ -8,7 +8,7 @@ const initialState = {
 
 export const setOrderReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ORDER:
+    case SET_ORDER_REQUEST:
       return {
         ...state,
         orderRequest: true,
@@ -21,7 +21,7 @@ export const setOrderReducer = (state = initialState, action) => {
         orderFailed: false,
         order: action.order
       }
-    case SET_ORDER_FAILED: 
+    case SET_ORDER_ERROR: 
       return {
         ...state,
         orderRequest: false,
