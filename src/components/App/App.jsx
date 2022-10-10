@@ -14,7 +14,8 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
-  const ingredients = useSelector(store => store.ingredients.data);
+  const {ingredients} = useSelector(store => store.burgerIngredients);
+  const {bun} = useSelector(store => store.burgerIngredients);
   const activeModalIngredient = useSelector(store => store.ingredientDetail.active);
   const dispatch = useDispatch();
   const [activeModalOrder, setActiveModalOrder] = React.useState(false);
@@ -25,7 +26,7 @@ function App() {
 
   const handleOpenModalOrder = () => {
     setActiveModalOrder(true)
-    dispatch(setOrder(ingredients.map(ing => ing._id)))
+    dispatch(setOrder([bun._id, ...ingredients.map(ing => ing._id), bun._id]));
   }
 
   const handleCloseModalIngredient = () => {
