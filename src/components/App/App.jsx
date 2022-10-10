@@ -9,7 +9,7 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import {useSelector, useDispatch} from 'react-redux';
 import {getIngredients} from '../../services/actions/getIngredients';
 import {setOrder} from '../../services/actions/setOrder';
-import {DELETE_INGREDIENT_DETAILS} from '../../services/actions/showIngredientDetails';
+import {deleteIngredientDetails} from '../../services/actions/showIngredientDetails';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -30,7 +30,7 @@ function App() {
   }
 
   const handleCloseModalIngredient = () => {
-    dispatch({type: DELETE_INGREDIENT_DETAILS})
+    dispatch(deleteIngredientDetails())
   }
 
   React.useEffect(() => {

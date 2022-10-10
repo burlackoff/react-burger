@@ -2,7 +2,7 @@ import style from './Ingredient.module.css';
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 import {ingredientType} from '../../utils/types';
 import {useDispatch, useSelector} from 'react-redux';
-import {ADD_INGREDIENT_DETAILS} from '../../services/actions/showIngredientDetails';
+import {showIngredientDetails} from '../../services/actions/showIngredientDetails';
 import { useDrag } from 'react-dnd';
 
 function Ingredient({data}) {
@@ -15,7 +15,7 @@ function Ingredient({data}) {
   });
 
   const openModal = () => {
-    dispatch({type: ADD_INGREDIENT_DETAILS, ingredient: data})
+    dispatch(showIngredientDetails(data))
   }
 
   const setCounter = () => {
