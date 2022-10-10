@@ -1,7 +1,7 @@
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag, useDrop } from 'react-dnd';
 import {useDispatch} from 'react-redux';
-import {DELETE_BURGER_INGREDIENT} from '../../services/actions/currentBurger';
+import {deleteBurgerIngredient} from '../../services/actions/currentBurger';
 import style from './BurgerConstructorItem.module.css';
 import {useRef} from 'react';
 
@@ -42,6 +42,8 @@ function BurgerConstructorItem({ing, index, moveIng}) {
 
   const opacity = isDragging ? 0 : 1;
   
+  const onHandleClose = () => {dispatch(deleteBurgerIngredient(index))}
+
   return (
     <li className={`${style.item} pr-2`} ref={ref} style={{opacity}}>
       <div className={style.icon}>
@@ -51,7 +53,7 @@ function BurgerConstructorItem({ing, index, moveIng}) {
         text={ing.name}
         price={ing.price}
         thumbnail={ing.image}
-        handleClose={() => dispatch({type: DELETE_BURGER_INGREDIENT, index: index})}
+        handleClose={() => onHandleClose()}
       />
     </li>
   )

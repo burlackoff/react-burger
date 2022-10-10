@@ -5,4 +5,5 @@ export const SORTED_BURGER_INGREDIENTS = 'SORTED_BURGER_INGREDIENTS';
 
 export const setBurgerBun = item => ({type: SET_BURGER_BUN, data: item});
 export const addBurgerIngredient = item => ({type: ADD_BURGER_INGREDIENTS, data: item});
+export const deleteBurgerIngredient = id => ({type: DELETE_BURGER_INGREDIENT, index: id })
 export const sortedIngredients = ingredients => ({type: SORTED_BURGER_INGREDIENTS, sorted: ingredients})
