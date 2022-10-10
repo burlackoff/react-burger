@@ -1,4 +1,4 @@
-import {GET_BURGER_INGREDIENTS, GET_BURGER_BUN, DELETE_BURGER_INGREDIENT, SORTED_BURGER_INGREDIENTS} from '../actions/currentBurger';
+import {ADD_BURGER_INGREDIENTS, SET_BURGER_BUN, DELETE_BURGER_INGREDIENT, SORTED_BURGER_INGREDIENTS} from '../actions/currentBurger';
 
 const initialState = {
   ingredients: [],
@@ -7,12 +7,12 @@ const initialState = {
 
 export const currentBurgerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_BURGER_INGREDIENTS:
+    case ADD_BURGER_INGREDIENTS:
       return {
         ...state,
         ingredients: [...state.ingredients, action.data]
       }
-    case GET_BURGER_BUN:
+    case SET_BURGER_BUN:
       return {
         ...state,
         bun: action.data

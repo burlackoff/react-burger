@@ -3,7 +3,7 @@ import {ConstructorElement, Button, CurrencyIcon} from '@ya.praktikum/react-deve
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import {GET_BURGER_INGREDIENTS, GET_BURGER_BUN, SORTED_BURGER_INGREDIENTS} from '../../services/actions/currentBurger';
+import {sortedIngredients, setBurgerBun, addBurgerIngredient} from '../../services/actions/currentBurger';
 import { useCallback } from 'react';
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem';
 
@@ -15,8 +15,8 @@ function BurgerConstructor({openModal}) {
   const [{isOver}, dropRef] = useDrop({
     accept: 'ingredient',
     drop(item) {
-      if (item.type === 'bun') {dispatch({type: GET_BURGER_BUN, data: item})}
-      else {dispatch({type: GET_BURGER_INGREDIENTS, data: item})}
+      if (item.type === 'bun') {dispatch(setBurgerBun(item))}
+      else {dispatch(addBurgerIngredient(item))}
     },
     collect: monitor => ({
       isOver: monitor.isOver()
@@ -33,7 +33,7 @@ function BurgerConstructor({openModal}) {
     const newIngredients = [...ingredients];
     newIngredients[dragIndex] = hoverItem;
     newIngredients[hoverIndex] = dragItem;
-    dispatch({type: SORTED_BURGER_INGREDIENTS, sorted: newIngredients});
+    dispatch(sortedIngredients(newIngredients));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ingredients])
 
