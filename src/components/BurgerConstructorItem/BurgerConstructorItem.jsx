@@ -43,7 +43,7 @@ function BurgerConstructorItem({ing, index, moveIng}) {
   const opacity = isDragging ? 0 : 1;
   
   return (
-    <li key={index} className={`${style.item} pr-2`} ref={ref} style={{opacity}}>
+    <li className={`${style.item} pr-2`} ref={ref} style={{opacity}}>
       <div className={style.icon}>
         <DragIcon type="primary" />
       </div>
