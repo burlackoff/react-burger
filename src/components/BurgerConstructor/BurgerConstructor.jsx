@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import {sortedIngredients, setBurgerBun, addBurgerIngredient} from '../../services/actions/currentBurger';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import BurgerConstructorItem from '../BurgerConstructorItem/BurgerConstructorItem';
 
 function BurgerConstructor({openModal}) {
@@ -25,7 +25,9 @@ function BurgerConstructor({openModal}) {
 
   const borderColor = isOver ? 'lightgreen' : 'transparent';
 
-  const price = ingredients.length > 0 && bun.price * 2 + ingredients.reduce((acc, item) => acc + item.price, 0);
+  const price = useMemo(() => {
+    return ingredients.length > 0 && bun.price * 2 + ingredients.reduce((acc, item) => acc + item.price, 0)
+  }, [ingredients, bun]);
   
   const moveIngredient = useCallback((dragIndex, hoverIndex) => {
     const dragItem = ingredients[dragIndex];
