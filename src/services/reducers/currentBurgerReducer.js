@@ -10,7 +10,7 @@ export const currentBurgerReducer = (state = initialState, action) => {
     case ADD_BURGER_INGREDIENTS:
       return {
         ...state,
-        ingredients: [...state.ingredients, action.data]
+        ingredients: [...state.ingredients, {...action.data, keyId: action.keyId}]
       }
     case SET_BURGER_BUN:
       return {

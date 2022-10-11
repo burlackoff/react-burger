@@ -39,7 +39,7 @@ function BurgerConstructor({openModal}) {
 
   const renderIngredients = (ing, index) => {
     return (
-      <BurgerConstructorItem ing={ing} index={index} key={index} moveIng={moveIngredient}/>
+      <BurgerConstructorItem ing={ing} index={index} key={ing.keyId} moveIng={moveIngredient}/>
     )
   }
 
