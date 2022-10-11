@@ -39,13 +39,11 @@ function BurgerConstructorItem({ing, index, moveIng}) {
   })
 
   dragRef(drop(ref));
-
-  const opacity = isDragging ? 0 : 1;
   
   const onHandleClose = () => {dispatch(deleteBurgerIngredient(index))}
 
   return (
-    <li className={`${style.item} pr-2`} ref={ref} style={{opacity}}>
+    <li className={isDragging ? `${style.item} ${style.item_hover} pr-2` : `${style.item} pr-2`} ref={ref}>
       <div className={style.icon}>
         <DragIcon type="primary" />
       </div>

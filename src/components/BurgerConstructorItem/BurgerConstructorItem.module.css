@@ -12,3 +12,7 @@
 .icon:hover {
   opacity: .5;
 }
+
+.item_hover {
+  opacity: 0;
+}

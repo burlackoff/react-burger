@@ -23,8 +23,6 @@ function BurgerConstructor({openModal}) {
     })
   })
 
-  const borderColor = isOver ? 'lightgreen' : 'transparent';
-
   const price = useMemo(() => {
     return ingredients.length > 0 && bun.price * 2 + ingredients.reduce((acc, item) => acc + item.price, 0)
   }, [ingredients, bun]);
@@ -47,7 +45,7 @@ function BurgerConstructor({openModal}) {
 
   return (
     <>
-      <div ref={dropRef} className={`${style.constructor}`} style={{borderColor}}>
+      <div ref={dropRef} className={isOver ? `${style.constructor} ${style.border_color}` : `${style.constructor}`}>
         <article className='pl-4'>
 
           {bun ?
