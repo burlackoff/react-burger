@@ -20,19 +20,25 @@ function BurgerIngredients() {
       <h1 className="text text_type_main-large">Соберите бургер</h1>
       <nav className={`${style.tabs} mt-5`}>
         <li>
-          <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
-            Булки
-          </Tab>
+          <a href='#bun' className={`${style.tab}`}>
+            <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
+              Булки
+            </Tab>
+          </a>
         </li>
         <li>
-          <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
-            Соусы
-          </Tab>
+          <a href='#sauce' className={`${style.tab}`}>
+            <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
+              Соусы
+            </Tab>
+          </a>
         </li>
         <li>
-          <Tab value="main" active={current === 'main'} onClick={setCurrent}>
-            Начинки
-          </Tab>
+          <a href='#main' className={`${style.tab}`}>
+            <Tab value="main" active={current === 'main'} onClick={setCurrent}>
+              Начинки
+            </Tab>
+          </a>
         </li>
       </nav>
       <div className={style.wrapper} onScroll={handleScroll}>
