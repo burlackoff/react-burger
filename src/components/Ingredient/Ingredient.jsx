@@ -21,7 +21,7 @@ function Ingredient({data}) {
   const setCounter = () => {
     if (data.type !== 'bun') {
       return ingredients.filter((item) => item._id === data._id).length
-    } else if (JSON.stringify(bun) === JSON.stringify(data)) {
+    } else if (bun?._id === data._id) {
       return 2
     } else return 0
   }
