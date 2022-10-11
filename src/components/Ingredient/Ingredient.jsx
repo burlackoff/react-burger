@@ -26,6 +26,8 @@ function Ingredient({data}) {
     } else return 0
   }
   
+  const counter = setCounter();
+
   return (
     <>
       <li className={style.ingredient} ref={dragRef} onClick={openModal}>
@@ -35,7 +37,7 @@ function Ingredient({data}) {
           <CurrencyIcon type="primary" />
         </div>
         <p className='text text_type_main-default mt-1'>{data.name}</p>
-        {setCounter() !== 0 ? <Counter count={setCounter()} size="default" className={style.count} /> : <></>}
+        {counter !== 0 ? <Counter count={counter} size="default" className={style.count} /> : <></>}
       </li>
     </>
   )
