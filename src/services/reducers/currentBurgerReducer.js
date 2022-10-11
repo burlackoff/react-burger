@@ -2,7 +2,7 @@ import {ADD_BURGER_INGREDIENTS, SET_BURGER_BUN, DELETE_BURGER_INGREDIENT, SORTED
 
 const initialState = {
   ingredients: [],
-  bun: {}
+  bun: null
 }
 
 export const currentBurgerReducer = (state = initialState, action) => {

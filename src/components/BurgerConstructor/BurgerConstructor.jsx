@@ -50,7 +50,7 @@ function BurgerConstructor({openModal}) {
       <div ref={dropRef} className={`${style.constructor}`} style={{borderColor}}>
         <article className='pl-4'>
 
-          {Object.keys(bun).length !== 0 ?
+          {bun ?
           <div className={`${style.item_bun} pr-4`}>
             <ConstructorElement
               type="top"
@@ -78,7 +78,7 @@ function BurgerConstructor({openModal}) {
           </>
           }
           
-          {Object.keys(bun).length !== 0 ?
+          {bun ?
           <div className={`${style.item_bun} pr-4`}>
             <ConstructorElement
               type="bottom"
@@ -94,7 +94,7 @@ function BurgerConstructor({openModal}) {
           </div>
           }
 
-          {ingredients.length > 0 && Object.keys(bun).length !== 0 ?
+          {ingredients.length > 0 && bun ?
           <div className={`${style.order} mt-10`}>
             <div className={style.price}>
               <p className="text text_type_digits-medium">{price}</p>
