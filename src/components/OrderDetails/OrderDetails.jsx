@@ -1,8 +1,11 @@
 import style from './OrderDetails.module.css';
 import iconImageDone from '../../images/done.png';
-import PropTypes from 'prop-types';
+import {useSelector} from 'react-redux';
 
-function OrderDetails({order}) {
+
+function OrderDetails() {
+  const order = useSelector(store => store.order.order)
+
   return (
     <>
       <h3 className='text text_type_digits-large'>{order}</h3>
@@ -13,9 +16,5 @@ function OrderDetails({order}) {
     </>
   )
 }
-
-OrderDetails.propTypes = {
-  order: PropTypes.number.isRequired
-};
 
 export default OrderDetails
