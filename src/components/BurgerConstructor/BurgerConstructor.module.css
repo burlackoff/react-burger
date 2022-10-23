@@ -23,7 +23,7 @@
   padding: 0;
   margin: 16px 0;
   overflow-y: scroll;
-  max-height: 465px;
+  max-height: calc(100vh - 530px);
 }
 
 .item_bun {
