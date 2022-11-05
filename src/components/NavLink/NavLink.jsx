@@ -1,3 +1,4 @@
+import React from "react";
 import style from "./NavLink.module.css";
 import PropTypes from "prop-types";
 
@@ -18,7 +19,7 @@ function NavLink({ text, icon, type }) {
 NavLink.propTypes = {
 	text: PropTypes.string,
 	icon: PropTypes.object,
-	type: PropTypes.string
+	type: PropTypes.string,
 };
 
 export default NavLink;

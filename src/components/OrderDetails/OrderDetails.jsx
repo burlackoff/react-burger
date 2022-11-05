@@ -1,9 +1,10 @@
+import React from "react";
 import style from "./OrderDetails.module.css";
 import iconImageDone from "../../images/done.png";
 import { useSelector } from "react-redux";
 
 function OrderDetails() {
-	const order = useSelector(store => store.order.order);
+	const order = useSelector((store) => store.order.order);
 
 	return (
 		<>

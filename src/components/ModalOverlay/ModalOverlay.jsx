@@ -1,10 +1,11 @@
+import React from "react";
 import style from "./ModalOverlay.module.css";
 import PropTypes from "prop-types";
 
 function ModalOverlay(props) {
 	const { visible, children, onClose } = props;
 
-	const handleOverlayClose = e => {
+	const handleOverlayClose = (e) => {
 		if (e.currentTarget === e.target) {
 			onClose();
 		}
@@ -25,7 +26,7 @@ function ModalOverlay(props) {
 ModalOverlay.propTypes = {
 	visible: PropTypes.bool.isRequired,
 	children: PropTypes.object.isRequired,
-	onClose: PropTypes.func.isRequired
+	onClose: PropTypes.func.isRequired,
 };
 
 export default ModalOverlay;

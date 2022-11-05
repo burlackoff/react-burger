@@ -1,9 +1,10 @@
+import React from "react";
 import style from "./AppHeader.module.css";
 import {
 	Logo,
 	BurgerIcon,
 	ListIcon,
-	ProfileIcon
+	ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import NavLink from "../NavLink/NavLink";
 

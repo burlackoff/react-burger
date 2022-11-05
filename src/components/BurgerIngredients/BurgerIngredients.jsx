@@ -6,9 +6,9 @@ import IngredientsList from "../IngredientsList/IngredientsList";
 function BurgerIngredients() {
 	const [current, setCurrent] = React.useState("bun");
 
-	const handleScroll = e => {
+	const handleScroll = (e) => {
 		let scrollDis = e.currentTarget.scrollTop;
-		e.currentTarget.querySelectorAll("section").forEach(section => {
+		e.currentTarget.querySelectorAll("section").forEach((section) => {
 			if (section.offsetTop - e.currentTarget.offsetTop <= scrollDis) {
 				setCurrent(section.id);
 			}

@@ -1,8 +1,9 @@
+import React from "react";
 import style from "./IngredientDetails.module.css";
 import { useSelector } from "react-redux";
 
 function IngredientDetails() {
-	const data = useSelector(store => store.ingredientDetail.ingredient);
+	const data = useSelector((store) => store.ingredientDetail.ingredient);
 
 	return (
 		<>

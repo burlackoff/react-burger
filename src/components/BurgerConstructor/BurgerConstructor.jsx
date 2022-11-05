@@ -1,8 +1,9 @@
+import React from "react";
 import style from "./BurgerConstructor.module.css";
 import {
 	ConstructorElement,
 	Button,
-	CurrencyIcon
+	CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,14 +11,14 @@ import { useDrop } from "react-dnd";
 import {
 	sortedIngredients,
 	setBurgerBun,
-	addBurgerIngredient
+	addBurgerIngredient,
 } from "../../services/actions/currentBurger";
 import { useCallback, useMemo } from "react";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
 
 function BurgerConstructor({ openModal }) {
-	const { ingredients } = useSelector(store => store.burgerIngredients);
-	const { bun } = useSelector(store => store.burgerIngredients);
+	const { ingredients } = useSelector((store) => store.burgerIngredients);
+	const { bun } = useSelector((store) => store.burgerIngredients);
 	const dispatch = useDispatch();
 
 	const [{ isOver }, dropRef] = useDrop({
@@ -29,9 +30,9 @@ function BurgerConstructor({ openModal }) {
 				dispatch(addBurgerIngredient(item));
 			}
 		},
-		collect: monitor => ({
-			isOver: monitor.isOver()
-		})
+		collect: (monitor) => ({
+			isOver: monitor.isOver(),
+		}),
 	});
 
 	const price = useMemo(() => {
@@ -126,7 +127,12 @@ function BurgerConstructor({ openModal }) {
 								<p className="text text_type_digits-medium">{price}</p>
 								<CurrencyIcon type="primary" />
 							</div>
-							<Button type="primary" size="large" onClick={openModal}>
+							<Button
+								type="primary"
+								size="large"
+								htmlType="button"
+								onClick={openModal}
+							>
 								Оформить заказ
 							</Button>
 						</div>
@@ -140,7 +146,7 @@ function BurgerConstructor({ openModal }) {
 }
 
 BurgerConstructor.propTypes = {
-	openModal: PropTypes.func.isRequired
+	openModal: PropTypes.func.isRequired,
 };
 
 export default BurgerConstructor;
