@@ -7,15 +7,43 @@ import {
 import styles from "./login.module.css";
 
 function LoginPage() {
-	const [value, setValue] = React.useState("");
+	const [valuePass, setValuePass] = React.useState("");
+	const [valueEmail, setValueEmail] = React.useState("");
+	const inputRef = React.useRef(null);
+
+	const onChange = (e) => {
+		setValueEmail(e.target.value);
+	};
+
+	const onIconClick = () => {
+		setTimeout(() => inputRef.current.focus(), 0);
+		alert("Icon Click Callback");
+	};
 
 	return (
 		<>
 			<div className={styles.wrapper}>
 				<form className={`${styles.form} mb-20`}>
 					<h1 className="text text_type_main-medium">Вход</h1>
-					<EmailInput name={"email"} placeholder="E-mail" value={value} />
-					<Input placeholder="Пароль" type="text" value={value} />
+					<EmailInput
+						onChange={onChange}
+						value={valueEmail}
+						name={"email"}
+						placeholder="E-mail"
+					/>
+					<Input
+						type="password"
+						placeholder="Пароль"
+						onChange={(e) => setValuePass(e.target.value)}
+						icon={"HideIcon"}
+						value={valuePass}
+						name={"name"}
+						error={false}
+						ref={inputRef}
+						onIconClick={onIconClick}
+						errorText={"Error"}
+						size={"default"}
+					/>
 					<Button type="primary" htmlType="submit">
 						Вход
 					</Button>
