@@ -17,8 +17,19 @@ export async function setOrderApi(ingredients) {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      ingredients: ingredients
-    })
+      ingredients: ingredients,
+    }),
+  });
+  return checkResponse(res);
+}
+
+export async function setEmailApi() {
+  const res = await fetch(`${url}password-reset`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: "",
+    }),
   });
   return checkResponse(res);
 }

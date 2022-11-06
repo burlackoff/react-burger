@@ -2,6 +2,7 @@ import React from "react";
 import {
 	Button,
 	EmailInput,
+	PasswordInput,
 	Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./register.module.css";
@@ -10,15 +11,13 @@ function RegisterPage() {
 	const [valueName, setValueName] = React.useState("");
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueEmail, setValueEmail] = React.useState("");
-	const inputPassRef = React.useRef(null);
 
 	const onChange = (e) => {
 		setValueEmail(e.target.value);
 	};
 
-	const onIconClick = () => {
-		setTimeout(() => inputPassRef.current.focus(), 0);
-		alert("Icon Click Callback");
+	const onChangePass = (e) => {
+		setValuePass(e.target.value);
 	};
 
 	return (
@@ -42,18 +41,11 @@ function RegisterPage() {
 						name={"email"}
 						placeholder="E-mail"
 					/>
-					<Input
-						type="password"
-						placeholder="Пароль"
-						onChange={(e) => setValuePass(e.target.value)}
-						icon={"HideIcon"}
+					<PasswordInput
+						onChange={onChangePass}
 						value={valuePass}
-						name={"name"}
-						error={false}
-						ref={inputPassRef}
-						onIconClick={onIconClick}
-						errorText={"Error"}
-						size={"default"}
+						name={"password"}
+						icon={"HideIcon"}
 					/>
 					<Button type="primary" htmlType="submit">
 						Зарегистрироваться

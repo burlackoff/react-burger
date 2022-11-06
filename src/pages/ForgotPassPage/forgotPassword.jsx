@@ -4,6 +4,7 @@ import {
 	EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./forgotPassword.module.css";
+import { setEmailApi } from "../../utils/api";
 
 function ForgotPassPage() {
 	const [valueEmail, setValueEmail] = React.useState("");
@@ -12,10 +13,16 @@ function ForgotPassPage() {
 		setValueEmail(e.target.value);
 	};
 
+	const onSubmit = (e) => {
+		e.preventDefault();
+		setEmailApi().then((data) => {
+			console.log(data);
+		});
+	};
 	return (
 		<>
 			<div className={styles.wrapper}>
-				<form className={`${styles.form} mb-20`}>
+				<form className={`${styles.form} mb-20`} onSubmit={(e) => onSubmit(e)}>
 					<h1 className="text text_type_main-medium">Восстановление пароля</h1>
 					<EmailInput
 						onChange={onChange}

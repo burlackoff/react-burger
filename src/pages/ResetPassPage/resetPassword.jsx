@@ -2,17 +2,16 @@ import React from "react";
 import {
 	Button,
 	Input,
+	PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./resetPassword.module.css";
 
 function ResetPassPage() {
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueCode, setValueCode] = React.useState("");
-	const refPass = React.useRef(null);
 
-	const onIconClick = () => {
-		setTimeout(() => refPass.current.focus(), 0);
-		alert("Icon Click Callback");
+	const onChangePass = (e) => {
+		setValuePass(e.target.value);
 	};
 
 	return (
@@ -20,18 +19,11 @@ function ResetPassPage() {
 			<div className={styles.wrapper}>
 				<form className={`${styles.form} mb-20`}>
 					<h1 className="text text_type_main-medium">Восстановление пароля</h1>
-					<Input
-						type="password"
-						placeholder="Введите новый пароль"
-						onChange={(e) => setValuePass(e.target.value)}
-						icon={"HideIcon"}
+					<PasswordInput
+						onChange={onChangePass}
 						value={valuePass}
-						name={"name"}
-						error={false}
-						ref={refPass}
-						onIconClick={onIconClick}
-						errorText={"Error"}
-						size={"default"}
+						name={"password"}
+						icon={"HideIcon"}
 					/>
 					<Input
 						type="text"

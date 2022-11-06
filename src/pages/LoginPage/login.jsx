@@ -2,22 +2,20 @@ import React from "react";
 import {
 	Button,
 	EmailInput,
-	Input,
+	PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
 
 function LoginPage() {
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueEmail, setValueEmail] = React.useState("");
-	const inputRef = React.useRef(null);
 
 	const onChange = (e) => {
 		setValueEmail(e.target.value);
 	};
 
-	const onIconClick = () => {
-		setTimeout(() => inputRef.current.focus(), 0);
-		alert("Icon Click Callback");
+	const onChangePass = (e) => {
+		setValuePass(e.target.value);
 	};
 
 	return (
@@ -31,18 +29,11 @@ function LoginPage() {
 						name={"email"}
 						placeholder="E-mail"
 					/>
-					<Input
-						type="password"
-						placeholder="Пароль"
-						onChange={(e) => setValuePass(e.target.value)}
-						icon={"HideIcon"}
+					<PasswordInput
+						onChange={onChangePass}
 						value={valuePass}
-						name={"name"}
-						error={false}
-						ref={inputRef}
-						onIconClick={onIconClick}
-						errorText={"Error"}
-						size={"default"}
+						name={"password"}
+						icon={"HideIcon"}
 					/>
 					<Button type="primary" htmlType="submit">
 						Вход
