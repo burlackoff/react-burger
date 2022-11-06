@@ -13,10 +13,10 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 function HomePage() {
-	const { ingredients } = useSelector(store => store.burgerIngredients);
-	const { bun } = useSelector(store => store.burgerIngredients);
+	const { ingredients } = useSelector((store) => store.burgerIngredients);
+	const { bun } = useSelector((store) => store.burgerIngredients);
 	const activeModalIngredient = useSelector(
-		store => store.ingredientDetail.active
+		(store) => store.ingredientDetail.active
 	);
 	const dispatch = useDispatch();
 	const [activeModalOrder, setActiveModalOrder] = React.useState(false);
@@ -27,7 +27,9 @@ function HomePage() {
 
 	const handleOpenModalOrder = () => {
 		setActiveModalOrder(true);
-		dispatch(setOrder([bun._id, ...ingredients.map(ing => ing._id), bun._id]));
+		dispatch(
+			setOrder([bun._id, ...ingredients.map((ing) => ing._id), bun._id])
+		);
 	};
 
 	const handleCloseModalIngredient = () => {
