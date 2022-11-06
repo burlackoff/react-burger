@@ -1,7 +1,7 @@
 import React from "react";
 import AppHeader from "../AppHeader/AppHeader";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { HomePage, LoginPage, RegisterPage } from "../../pages";
+import { HomePage, LoginPage, RegisterPage, ForgotPassPage } from "../../pages";
 
 function App() {
 	return (
@@ -17,6 +17,9 @@ function App() {
 					</Route>
 					<Route path="/register" exact={true}>
 						<RegisterPage />
+					</Route>
+					<Route path="/forgot-password" exact={true}>
+						<ForgotPassPage />
 					</Route>
 				</Switch>
 			</Router>
