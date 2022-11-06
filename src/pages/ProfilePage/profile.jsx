@@ -1,3 +1,4 @@
+import React from "react";
 import {
 	EmailInput,
 	Input,
@@ -7,6 +8,18 @@ import { NavLink } from "react-router-dom";
 import styles from "./profile.module.css";
 
 function ProfilePage() {
+	const [valueName, setValueName] = React.useState("Марк");
+	const [valuePass, setValuePass] = React.useState("password");
+	const [valueEmail, setValueEmail] = React.useState("mail@stellar.burgers");
+
+	const onChange = (e) => {
+		setValueEmail(e.target.value);
+	};
+
+	const onChangePass = (e) => {
+		setValuePass(e.target.value);
+	};
+
 	return (
 		<>
 			<div className={styles.wrapper}>
@@ -45,9 +58,30 @@ function ProfilePage() {
 					</p>
 				</nav>
 				<form className={styles.form}>
-					<Input></Input>
-					<EmailInput></EmailInput>
-					<PasswordInput></PasswordInput>
+					<Input
+						type="text"
+						placeholder="Имя"
+						onChange={(e) => setValueName(e.target.value)}
+						icon={"EditIcon"}
+						value={valueName}
+						name={"name"}
+						error={false}
+						errorText={"Error"}
+						size={"default"}
+					></Input>
+					<EmailInput
+						onChange={onChange}
+						value={valueEmail}
+						name={"email"}
+						placeholder="Логин"
+						isIcon={true}
+					></EmailInput>
+					<PasswordInput
+						onChange={onChangePass}
+						value={valuePass}
+						name={"password"}
+						icon={"EditIcon"}
+					></PasswordInput>
 				</form>
 			</div>
 		</>
