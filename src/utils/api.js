@@ -33,3 +33,15 @@ export async function setEmailApi() {
   });
   return checkResponse(res);
 }
+
+export async function setResetPassApi() {
+  const res = await fetch(`${url}password-reset/reset`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      password: "",
+      token: "",
+    }),
+  });
+  return checkResponse(res);
+}

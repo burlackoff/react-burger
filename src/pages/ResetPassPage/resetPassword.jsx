@@ -5,6 +5,7 @@ import {
 	PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./resetPassword.module.css";
+import { setResetPassApi } from "../../utils/api";
 
 function ResetPassPage() {
 	const [valuePass, setValuePass] = React.useState("");
@@ -14,10 +15,15 @@ function ResetPassPage() {
 		setValuePass(e.target.value);
 	};
 
+	const onSubmit = (e) => {
+		e.preventDefault();
+		setResetPassApi().then((data) => console.log(data));
+	};
+
 	return (
 		<>
 			<div className={styles.wrapper}>
-				<form className={`${styles.form} mb-20`}>
+				<form className={`${styles.form} mb-20`} onSubmit={(e) => onSubmit(e)}>
 					<h1 className="text text_type_main-medium">Восстановление пароля</h1>
 					<PasswordInput
 						onChange={onChangePass}
