@@ -7,6 +7,7 @@ import {
 	RegisterPage,
 	ForgotPassPage,
 	ResetPassPage,
+	ProfilePage,
 } from "../../pages";
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
 					</Route>
 					<Route path="/reset-password" exact={true}>
 						<ResetPassPage />
+					</Route>
+					<Route path="/profile" exact={true}>
+						<ProfilePage />
 					</Route>
 				</Switch>
 			</Router>
