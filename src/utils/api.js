@@ -46,13 +46,13 @@ export async function setResetPassApi() {
   return checkResponse(res);
 }
 
-export async function loginApi() {
+export async function loginApi({ email, password }) {
   const res = await fetch(`${url}auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      email: "",
-      password: "",
+      email: email,
+      password: password,
     }),
   });
   return checkResponse(res);

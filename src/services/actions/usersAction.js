@@ -1,4 +1,4 @@
-import { registerApi } from "../../utils/api";
+import { loginApi, registerApi } from "../../utils/api";
 
 export const REGISTRATION_REQUEST = "REGISTRATION_REQUEST";
 export const REGISTRATION_ERROR = "REGISTRATION_ERROR";
@@ -32,6 +32,28 @@ export function register(form) {
       } else {
         dispatch({
           type: REGISTRATION_ERROR,
+        });
+      }
+    });
+  };
+}
+
+export function login(form) {
+  return function (dispatch) {
+    dispatch({
+      type: LOGIN_REQUEST,
+    });
+    loginApi(form).then((res) => {
+      if (res && res.success) {
+        dispatch({
+          type: LOGIN_SUCCESS,
+          user: res.user,
+          accessToken: res.accessToken,
+          refreshToken: res.refreshToken,
+        });
+      } else {
+        dispatch({
+          type: LOGIN_ERROR,
         });
       }
     });

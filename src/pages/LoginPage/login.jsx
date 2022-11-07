@@ -5,32 +5,35 @@ import {
 	PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
+import { useDispatch } from "react-redux";
+import { login } from "../../services/actions/usersAction";
 
 function LoginPage() {
+	const dispatch = useDispatch();
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueEmail, setValueEmail] = React.useState("");
 
-	const onChange = (e) => {
-		setValueEmail(e.target.value);
-	};
-
-	const onChangePass = (e) => {
-		setValuePass(e.target.value);
-	};
+	const onSubmit = React.useCallback(
+		(e) => {
+			e.preventDefault();
+			dispatch(login({ email: valueEmail, password: valuePass }));
+		},
+		[valuePass, valueEmail]
+	);
 
 	return (
 		<>
 			<div className={styles.wrapper}>
-				<form className={`${styles.form} mb-20`}>
+				<form className={`${styles.form} mb-20`} onSubmit={onSubmit}>
 					<h1 className="text text_type_main-medium">Вход</h1>
 					<EmailInput
-						onChange={onChange}
+						onChange={(e) => setValueEmail(e.target.value)}
 						value={valueEmail}
 						name={"email"}
 						placeholder="E-mail"
 					/>
 					<PasswordInput
-						onChange={onChangePass}
+						onChange={(e) => setValuePass(e.target.value)}
 						value={valuePass}
 						name={"password"}
 						icon={"HideIcon"}
