@@ -45,3 +45,54 @@ export async function setResetPassApi() {
   });
   return checkResponse(res);
 }
+
+export async function loginApi() {
+  const res = await fetch(`${url}auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: "",
+      password: "",
+    }),
+  });
+  return checkResponse(res);
+}
+
+export async function registerApi({ email, password, name }) {
+  const res = await fetch(`${url}auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+      name: name,
+    }),
+  });
+  return checkResponse(res);
+}
+
+export async function logoutApi() {
+  const res = await fetch(`${url}auth/logout`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: "",
+      password: "",
+      name: "",
+    }),
+  });
+  return checkResponse(res);
+}
+
+export async function tokenApi() {
+  const res = await fetch(`${url}auth/token`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: "",
+      password: "",
+      name: "",
+    }),
+  });
+  return checkResponse(res);
+}

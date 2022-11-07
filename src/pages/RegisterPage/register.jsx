@@ -6,24 +6,29 @@ import {
 	Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./register.module.css";
+import { useDispatch } from "react-redux";
+import { register } from "../../services/actions/usersAction";
 
 function RegisterPage() {
+	const dispatch = useDispatch();
 	const [valueName, setValueName] = React.useState("");
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueEmail, setValueEmail] = React.useState("");
 
-	const onChange = (e) => {
-		setValueEmail(e.target.value);
-	};
-
-	const onChangePass = (e) => {
-		setValuePass(e.target.value);
-	};
+	const onSubmit = React.useCallback(
+		(e) => {
+			e.preventDefault();
+			dispatch(
+				register({ email: valueEmail, password: valuePass, name: valueName })
+			);
+		},
+		[valueEmail, valuePass, valueName]
+	);
 
 	return (
 		<>
 			<div className={styles.wrapper}>
-				<form className={`${styles.form} mb-20`}>
+				<form className={`${styles.form} mb-20`} onSubmit={onSubmit}>
 					<h1 className="text text_type_main-medium">Регистрация</h1>
 					<Input
 						type="text"
@@ -36,13 +41,13 @@ function RegisterPage() {
 						size={"default"}
 					></Input>
 					<EmailInput
-						onChange={onChange}
+						onChange={(e) => setValueEmail(e.target.value)}
 						value={valueEmail}
 						name={"email"}
 						placeholder="E-mail"
 					/>
 					<PasswordInput
-						onChange={onChangePass}
+						onChange={(e) => setValuePass(e.target.value)}
 						value={valuePass}
 						name={"password"}
 						icon={"HideIcon"}

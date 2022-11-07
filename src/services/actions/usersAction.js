@@ -1,0 +1,39 @@
+import { registerApi } from "../../utils/api";
+
+export const REGISTRATION_REQUEST = "REGISTRATION_REQUEST";
+export const REGISTRATION_ERROR = "REGISTRATION_ERROR";
+export const REGISTRATION_SUCCESS = "REGISTRATION_SUCCESS";
+
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGIN_ERROR = "LOGIN_ERROR";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+
+export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
+export const FORGOT_PASSWORD_ERROR = "FORGOT_PASSWORD_ERROR";
+export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
+
+export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
+export const RESET_PASSWORD_ERROR = "RESET_PASSWORD_ERROR";
+export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
+
+export function register(form) {
+  return function (dispatch) {
+    dispatch({
+      type: REGISTRATION_REQUEST,
+    });
+    registerApi(form).then((res) => {
+      if (res && res.success) {
+        dispatch({
+          type: REGISTRATION_SUCCESS,
+          user: res.user,
+          accessToken: res.accessToken,
+          refreshToken: res.refreshToken,
+        });
+      } else {
+        dispatch({
+          type: REGISTRATION_ERROR,
+        });
+      }
+    });
+  };
+}
