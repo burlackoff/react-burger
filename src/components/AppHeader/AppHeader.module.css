@@ -40,11 +40,20 @@
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  /* color: var(--text-primary-color); */
+  color: var(--text-inactive-color);
   transition: var(--common-transition);
   cursor: pointer;
 }
 
+.link_active {
+  color: var(--text-primary-color);
+  cursor: default;
+}
+
 .link:hover {
-  opacity: 0.5;
+  color: var(--text-primary-color);
+}
+
+.text {
+  margin: 0;
 }

@@ -9,6 +9,8 @@ import {
 import { NavLink } from "react-router-dom";
 
 function AppHeader() {
+	const [type, setType] = React.useState("construct");
+
 	return (
 		<header className={style.header}>
 			<div className={`${style.content} m-4`}>
@@ -16,21 +18,28 @@ function AppHeader() {
 					<ul className={style.nav_list}>
 						<li>
 							<NavLink
-								className={`${style.link} p-4 m-4 text_color_inactive`}
-								activeClassName=""
+								className={`${style.link} p-4 text text_type_main-default`}
+								activeClassName={style.link_active}
 								to={{ pathname: "/" }}
+								exact="true"
+								onClick={() => setType("construct")}
 							>
-								<BurgerIcon type="primary" />
-								<p className="text text_type_main-default">Конструктор</p>
+								<BurgerIcon
+									type={type === "construct" ? "primary" : "secondary"}
+								/>
+								<p className={style.text}>Конструктор</p>
 							</NavLink>
 						</li>
 						<li>
 							<NavLink
-								className={`${style.link} p-4 m-4`}
+								className={`${style.link} p-4 text text_type_main-default`}
+								activeClassName={style.link_active}
 								to={{ pathname: "/profile/order" }}
+								exact="true"
+								onClick={() => setType("strip")}
 							>
-								<ListIcon type="secondary" />
-								<p className="text text_type_main-default">Лента заказов</p>
+								<ListIcon type={type === "strip" ? "primary" : "secondary"} />
+								<p className={style.text}>Лента заказов</p>
 							</NavLink>
 						</li>
 					</ul>
@@ -42,11 +51,16 @@ function AppHeader() {
 					<ul className={style.nav_list}>
 						<li>
 							<NavLink
-								className={`${style.link} p-4 m-4`}
+								className={`${style.link} p-4 text text_type_main-default`}
+								activeClassName={style.link_active}
 								to={{ pathname: "/profile" }}
+								exact="true"
+								onClick={() => setType("profile")}
 							>
-								<ProfileIcon type="secondary" />
-								<p className="text text_type_main-default">Личный кабинет</p>
+								<ProfileIcon
+									type={type === "profile" ? "primary" : "secondary"}
+								/>
+								<p className={style.text}>Личный кабинет</p>
 							</NavLink>
 						</li>
 					</ul>
