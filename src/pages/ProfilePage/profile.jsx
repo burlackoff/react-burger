@@ -9,8 +9,8 @@ import styles from "./profile.module.css";
 import { useSelector } from "react-redux";
 
 function ProfilePage() {
-	const { email } = useSelector((store) => store.user);
-	console.log(email);
+	const { user } = useSelector((store) => store);
+	console.log(user);
 
 	const [valueName, setValueName] = React.useState("Марк");
 	const [valuePass, setValuePass] = React.useState("password");

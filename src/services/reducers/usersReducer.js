@@ -5,6 +5,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
+  GET_REFRESH_TOKEN,
 } from "../actions/usersAction";
 
 const initialState = {
@@ -63,7 +64,13 @@ export const usersReducer = (state = initialState, action) => {
         success: false,
         error: true,
       };
-
+    case GET_REFRESH_TOKEN:
+      return {
+        ...state,
+        success: false,
+        accessToken: action.accessToken,
+        refreshToken: action.refreshToken,
+      };
     default:
       return state;
   }
