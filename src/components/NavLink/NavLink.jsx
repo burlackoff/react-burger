@@ -9,7 +9,7 @@ function NavLink({ text, icon, type }) {
 			: "text text_type_main-default";
 
 	return (
-		<a className={`${style.link} pt-4 pb-4 pr-5 pl-5`} href="/#">
+		<a className={`${style.link} pt-4 pb-4 pr-5 pl-5`}>
 			{icon}
 			<p className={color}>{text}</p>
 		</a>

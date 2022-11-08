@@ -71,27 +71,23 @@ export async function registerApi({ email, password, name }) {
   return checkResponse(res);
 }
 
-export async function logoutApi() {
+export async function logoutApi({ token }) {
   const res = await fetch(`${url}auth/logout`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      email: "",
-      password: "",
-      name: "",
+      token: token,
     }),
   });
   return checkResponse(res);
 }
 
-export async function tokenApi() {
+export async function tokenApi({ token }) {
   const res = await fetch(`${url}auth/token`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      email: "",
-      password: "",
-      name: "",
+      token: token,
     }),
   });
   return checkResponse(res);

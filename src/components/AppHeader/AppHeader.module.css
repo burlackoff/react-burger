@@ -34,3 +34,17 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 }
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  /* color: var(--text-primary-color); */
+  transition: var(--common-transition);
+  cursor: pointer;
+}
+
+.link:hover {
+  opacity: 0.5;
+}

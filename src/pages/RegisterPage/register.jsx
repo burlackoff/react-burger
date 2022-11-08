@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
 	Button,
 	EmailInput,
@@ -8,8 +8,10 @@ import {
 import styles from "./register.module.css";
 import { useDispatch } from "react-redux";
 import { register } from "../../services/actions/usersAction";
+import { useHistory } from "react-router-dom";
 
 function RegisterPage() {
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const [valueName, setValueName] = React.useState("");
 	const [valuePass, setValuePass] = React.useState("");
@@ -24,6 +26,10 @@ function RegisterPage() {
 		},
 		[valueEmail, valuePass, valueName]
 	);
+
+	const login = useCallback(() => {
+		history.replace({ pathname: "/login" });
+	}, [history]);
 
 	return (
 		<>
@@ -60,7 +66,12 @@ function RegisterPage() {
 					<p className="text text_type_main-default text_color_inactive">
 						Уже зарегистрированы?
 					</p>
-					<Button type="secondary" htmlType="button" extraClass={styles.link}>
+					<Button
+						type="secondary"
+						htmlType="button"
+						extraClass={styles.link}
+						onClick={login}
+					>
 						Войти
 					</Button>
 				</div>

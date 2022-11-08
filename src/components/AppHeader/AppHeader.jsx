@@ -6,7 +6,7 @@ import {
 	ListIcon,
 	ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import NavLink from "../NavLink/NavLink";
+import { NavLink } from "react-router-dom";
 
 function AppHeader() {
 	return (
@@ -16,18 +16,22 @@ function AppHeader() {
 					<ul className={style.nav_list}>
 						<li>
 							<NavLink
-								text={"Конструктор"}
-								className="p-4 m-4"
-								icon={<BurgerIcon type="primary" />}
-							/>
+								className={`${style.link} p-4 m-4 text_color_inactive`}
+								activeClassName=""
+								to={{ pathname: "/" }}
+							>
+								<BurgerIcon type="primary" />
+								<p className="text text_type_main-default">Конструктор</p>
+							</NavLink>
 						</li>
 						<li>
 							<NavLink
-								text={"Лента заказов"}
-								className="p-4 m-4"
-								icon={<ListIcon type="secondary" />}
-								type="secondary"
-							/>
+								className={`${style.link} p-4 m-4`}
+								to={{ pathname: "/profile/order" }}
+							>
+								<ListIcon type="secondary" />
+								<p className="text text_type_main-default">Лента заказов</p>
+							</NavLink>
 						</li>
 					</ul>
 				</nav>
@@ -38,11 +42,12 @@ function AppHeader() {
 					<ul className={style.nav_list}>
 						<li>
 							<NavLink
-								text={"Личный кабинет"}
-								className="p-4 m-4"
-								icon={<ProfileIcon type="secondary" />}
-								type="secondary"
-							/>
+								className={`${style.link} p-4 m-4`}
+								to={{ pathname: "/profile" }}
+							>
+								<ProfileIcon type="secondary" />
+								<p className="text text_type_main-default">Личный кабинет</p>
+							</NavLink>
 						</li>
 					</ul>
 				</nav>

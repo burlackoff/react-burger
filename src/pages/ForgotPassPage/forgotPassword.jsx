@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
 	Button,
 	EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./forgotPassword.module.css";
 import { setEmailApi } from "../../utils/api";
+import { useHistory } from "react-router-dom";
 
 function ForgotPassPage() {
+	const history = useHistory();
 	const [valueEmail, setValueEmail] = React.useState("");
 
 	const onChange = (e) => {
@@ -19,6 +21,11 @@ function ForgotPassPage() {
 			console.log(data);
 		});
 	};
+
+	const login = useCallback(() => {
+		history.replace({ pathname: "/login" });
+	}, [history]);
+
 	return (
 		<>
 			<div className={styles.wrapper}>
@@ -38,7 +45,12 @@ function ForgotPassPage() {
 					<p className="text text_type_main-default text_color_inactive">
 						Вспомнили пароль?
 					</p>
-					<Button type="secondary" htmlType="button" extraClass={styles.link}>
+					<Button
+						type="secondary"
+						htmlType="button"
+						extraClass={styles.link}
+						onClick={login}
+					>
 						Войти
 					</Button>
 				</div>

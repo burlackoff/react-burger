@@ -51,6 +51,7 @@ export function login(form) {
           accessToken: res.accessToken,
           refreshToken: res.refreshToken,
         });
+        form.history.replace({ pathname: "/" });
       } else {
         dispatch({
           type: LOGIN_ERROR,

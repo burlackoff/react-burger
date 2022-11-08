@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
 	Button,
 	EmailInput,
@@ -7,8 +7,11 @@ import {
 import styles from "./login.module.css";
 import { useDispatch } from "react-redux";
 import { login } from "../../services/actions/usersAction";
+import { useHistory } from "react-router-dom";
 
 function LoginPage() {
+	const history = useHistory();
+
 	const dispatch = useDispatch();
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueEmail, setValueEmail] = React.useState("");
@@ -16,10 +19,20 @@ function LoginPage() {
 	const onSubmit = React.useCallback(
 		(e) => {
 			e.preventDefault();
-			dispatch(login({ email: valueEmail, password: valuePass }));
+			dispatch(
+				login({ email: valueEmail, password: valuePass, history: history })
+			);
 		},
 		[valuePass, valueEmail]
 	);
+
+	const register = useCallback(() => {
+		history.replace({ pathname: "/register" });
+	}, [history]);
+
+	const forgotPassword = useCallback(() => {
+		history.replace({ pathname: "/forgot-password" });
+	}, [history]);
 
 	return (
 		<>
@@ -46,7 +59,12 @@ function LoginPage() {
 					<p className="text text_type_main-default text_color_inactive">
 						Вы — новый пользователь?
 					</p>
-					<Button type="secondary" htmlType="button" extraClass={styles.link}>
+					<Button
+						type="secondary"
+						htmlType="button"
+						extraClass={styles.link}
+						onClick={register}
+					>
 						Зарегистрироваться
 					</Button>
 				</div>
@@ -54,7 +72,12 @@ function LoginPage() {
 					<p className="text text_type_main-default text_color_inactive">
 						Забыли пароль?
 					</p>
-					<Button type="secondary" htmlType="button" extraClass={styles.link}>
+					<Button
+						type="secondary"
+						htmlType="button"
+						extraClass={styles.link}
+						onClick={forgotPassword}
+					>
 						Восстановить пароль
 					</Button>
 				</div>
