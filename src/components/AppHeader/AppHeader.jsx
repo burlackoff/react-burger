@@ -21,7 +21,7 @@ function AppHeader() {
 								className={`${style.link} p-4 text text_type_main-default`}
 								activeClassName={style.link_active}
 								to={{ pathname: "/" }}
-								exact="true"
+								exact={true}
 								onClick={() => setType("construct")}
 							>
 								<BurgerIcon
@@ -35,7 +35,7 @@ function AppHeader() {
 								className={`${style.link} p-4 text text_type_main-default`}
 								activeClassName={style.link_active}
 								to={{ pathname: "/profile/order" }}
-								exact="true"
+								exact={true}
 								onClick={() => setType("strip")}
 							>
 								<ListIcon type={type === "strip" ? "primary" : "secondary"} />
@@ -54,7 +54,7 @@ function AppHeader() {
 								className={`${style.link} p-4 text text_type_main-default`}
 								activeClassName={style.link_active}
 								to={{ pathname: "/profile" }}
-								exact="true"
+								exact={true}
 								onClick={() => setType("profile")}
 							>
 								<ProfileIcon
