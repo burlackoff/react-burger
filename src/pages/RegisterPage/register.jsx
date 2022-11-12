@@ -6,11 +6,12 @@ import {
 	Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./register.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../services/actions/usersAction";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 
 function RegisterPage() {
+	const { user } = useSelector((store) => store.userInfo);
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [valueName, setValueName] = React.useState("");
@@ -30,6 +31,10 @@ function RegisterPage() {
 	const login = useCallback(() => {
 		history.replace({ pathname: "/login" });
 	}, [history]);
+
+	if (user.name) {
+		return <Redirect to={{ pathname: "/" }} />;
+	}
 
 	return (
 		<>

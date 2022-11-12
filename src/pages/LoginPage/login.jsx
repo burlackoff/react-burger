@@ -5,11 +5,12 @@ import {
 	PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../services/actions/usersAction";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 
 function LoginPage() {
+	const { user } = useSelector((store) => store.userInfo);
 	const history = useHistory();
 
 	const dispatch = useDispatch();
@@ -33,6 +34,10 @@ function LoginPage() {
 	const forgotPassword = useCallback(() => {
 		history.replace({ pathname: "/forgot-password" });
 	}, [history]);
+
+	if (user.name) {
+		return <Redirect to={{ pathname: "/" }} />;
+	}
 
 	return (
 		<>

@@ -5,9 +5,11 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./forgotPassword.module.css";
 import { setEmailApi } from "../../utils/api";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function ForgotPassPage() {
+	const { user } = useSelector((store) => store.userInfo);
 	const history = useHistory();
 	const [valueEmail, setValueEmail] = React.useState("");
 
@@ -25,6 +27,10 @@ function ForgotPassPage() {
 	const login = useCallback(() => {
 		history.replace({ pathname: "/login" });
 	}, [history]);
+
+	if (user.name) {
+		return <Redirect to={{ pathname: "/" }} />;
+	}
 
 	return (
 		<>

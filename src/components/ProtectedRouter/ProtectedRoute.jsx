@@ -23,7 +23,13 @@ function ProtectedRoute({ children, ...rest }) {
 	return (
 		<Route
 			{...rest}
-			render={() => (user.name ? children : <Redirect to={"/login"} />)}
+			render={({ location }) =>
+				user.name ? (
+					children
+				) : (
+					<Redirect to={{ pathname: "/login", state: { from: location } }} />
+				)
+			}
 		/>
 	);
 }

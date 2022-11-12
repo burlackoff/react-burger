@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
 	Button,
 	Input,
@@ -6,27 +6,31 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./resetPassword.module.css";
 import { setResetPassApi } from "../../utils/api";
+import { Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function ResetPassPage() {
+	const { user } = useSelector((store) => store.userInfo);
+
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueCode, setValueCode] = React.useState("");
 
-	const onChangePass = (e) => {
-		setValuePass(e.target.value);
-	};
-
-	const onSubmit = (e) => {
+	const onSubmit = useCallback((e) => {
 		e.preventDefault();
 		setResetPassApi().then((data) => console.log(data));
-	};
+	}, []);
+
+	if (user.name) {
+		return <Redirect to={{ pathname: "/" }} />;
+	}
 
 	return (
 		<>
 			<div className={styles.wrapper}>
-				<form className={`${styles.form} mb-20`} onSubmit={(e) => onSubmit(e)}>
+				<form className={`${styles.form} mb-20`} onSubmit={onSubmit}>
 					<h1 className="text text_type_main-medium">Восстановление пароля</h1>
 					<PasswordInput
-						onChange={onChangePass}
+						onChange={(e) => setValuePass(e.target.value)}
 						value={valuePass}
 						name={"password"}
 						icon={"HideIcon"}
