@@ -1,4 +1,5 @@
 import { url } from "./constants";
+import { getCookie } from "./cookie";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -71,23 +72,50 @@ export async function registerApi({ email, password, name }) {
   return checkResponse(res);
 }
 
-export async function logoutApi({ token }) {
+export async function logoutApi() {
   const res = await fetch(`${url}auth/logout`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      token: token,
+      token: "Bearer " + getCookie("refreshToken"),
     }),
   });
   return checkResponse(res);
 }
 
-export async function tokenApi({ token }) {
+export async function refreshTokenApi() {
   const res = await fetch(`${url}auth/token`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      token: token,
+      token: "Bearer " + getCookie("refreshToken"),
+    }),
+  });
+  return checkResponse(res);
+}
+
+export async function getUserApi() {
+  const res = await fetch(`${url}auth/user`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getCookie("accessToken"),
+    },
+  });
+  return checkResponse(res);
+}
+
+export async function refreshUserApi({ email, password, name }) {
+  const res = await fetch(`${url}auth/user`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getCookie("accessToken"),
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+      name: name,
     }),
   });
   return checkResponse(res);

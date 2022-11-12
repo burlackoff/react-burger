@@ -1,4 +1,10 @@
-import { loginApi, registerApi, tokenApi } from "../../utils/api";
+import {
+  loginApi,
+  registerApi,
+  refreshTokenApi,
+  getUserApi,
+} from "../../utils/api";
+import { setCookie } from "../../utils/cookie";
 
 export const REGISTRATION_REQUEST = "REGISTRATION_REQUEST";
 export const REGISTRATION_ERROR = "REGISTRATION_ERROR";
@@ -16,7 +22,13 @@ export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
 export const RESET_PASSWORD_ERROR = "RESET_PASSWORD_ERROR";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 
-export const GET_REFRESH_TOKEN = "GET_REFRESH_TOKEN";
+export const GET_REFRESH_TOKEN_REQUEST = "GET_REFRESH_TOKEN_REQUEST";
+export const GET_REFRESH_TOKEN_ERROR = "GET_REFRESH_TOKEN_ERROR";
+export const GET_REFRESH_TOKEN_SUCCESS = "GET_REFRESH_TOKEN_SUCCESS";
+
+export const GET_USER_REQUEST = "GET_USER_REQUEST";
+export const GET_USER_ERROR = "GET_USER_ERROR";
+export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 
 export function register(form) {
   return function (dispatch) {
@@ -47,6 +59,8 @@ export function login(form) {
     });
     loginApi(form).then((res) => {
       if (res && res.success) {
+        setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
+        setCookie("refreshToken", res.refreshToken.split("Bearer ")[1]);
         dispatch({
           type: LOGIN_SUCCESS,
           user: res.user,
@@ -65,12 +79,39 @@ export function login(form) {
 
 export function refreshToken(token) {
   return function (dispatch) {
-    tokenApi(token).then((res) => {
+    dispatch({
+      type: GET_REFRESH_TOKEN_REQUEST,
+    });
+    refreshTokenApi(token).then((res) => {
       if (res && res.success) {
         dispatch({
-          type: GET_REFRESH_TOKEN,
+          type: GET_REFRESH_TOKEN_SUCCESS,
           accessToken: res.accessToken,
           refreshToken: res.refreshToken,
+        });
+      } else {
+        dispatch({
+          type: GET_REFRESH_TOKEN_ERROR,
+        });
+      }
+    });
+  };
+}
+
+export function getUser() {
+  return function (dispatch) {
+    dispatch({
+      type: GET_USER_REQUEST,
+    });
+    getUserApi().then((res) => {
+      if (res && res.success) {
+        dispatch({
+          type: GET_USER_SUCCESS,
+          user: res.user,
+        });
+      } else {
+        dispatch({
+          type: GET_USER_ERROR,
         });
       }
     });

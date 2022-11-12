@@ -5,7 +5,12 @@ import {
   LOGIN_REQUEST,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
-  GET_REFRESH_TOKEN,
+  GET_REFRESH_TOKEN_REQUEST,
+  GET_REFRESH_TOKEN_ERROR,
+  GET_REFRESH_TOKEN_SUCCESS,
+  GET_USER_REQUEST,
+  GET_USER_ERROR,
+  GET_USER_SUCCESS,
 } from "../actions/usersAction";
 
 const initialState = {
@@ -64,12 +69,44 @@ export const usersReducer = (state = initialState, action) => {
         success: false,
         error: true,
       };
-    case GET_REFRESH_TOKEN:
+    case GET_REFRESH_TOKEN_REQUEST:
+      return {
+        ...state,
+        success: true,
+        error: false,
+      };
+    case GET_REFRESH_TOKEN_SUCCESS:
       return {
         ...state,
         success: false,
+        error: false,
         accessToken: action.accessToken,
         refreshToken: action.refreshToken,
+      };
+    case GET_REFRESH_TOKEN_ERROR:
+      return {
+        ...state,
+        success: false,
+        error: true,
+      };
+    case GET_USER_REQUEST:
+      return {
+        ...state,
+        success: true,
+        error: false,
+      };
+    case GET_USER_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        error: false,
+        user: action.user,
+      };
+    case GET_USER_ERROR:
+      return {
+        ...state,
+        success: false,
+        error: true,
       };
     default:
       return state;

@@ -6,9 +6,11 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink } from "react-router-dom";
 import styles from "./profile.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../../services/actions/usersAction";
 
 function ProfilePage() {
+	const dispatch = useDispatch();
 	const { user } = useSelector((store) => store);
 	console.log(user);
 
@@ -23,6 +25,10 @@ function ProfilePage() {
 	const onChangePass = (e) => {
 		setValuePass(e.target.value);
 	};
+
+	React.useEffect(() => {
+		dispatch(getUser());
+	}, []);
 
 	return (
 		<>
