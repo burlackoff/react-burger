@@ -105,7 +105,7 @@ export async function getUserApi() {
   return checkResponse(res);
 }
 
-export async function refreshUserApi({ email, password, name }) {
+export async function updateUserApi({ email, password, name }) {
   const res = await fetch(`${url}auth/user`, {
     method: "PATCH",
     headers: {

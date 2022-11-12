@@ -11,5 +11,5 @@ export const rootReducer = combineReducers({
   burgerIngredients: currentBurgerReducer,
   ingredientDetail: showIngredientDetailsReducer,
   order: setOrderReducer,
-  user: usersReducer,
+  userInfo: usersReducer,
 });

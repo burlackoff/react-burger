@@ -11,6 +11,9 @@ import {
   GET_USER_REQUEST,
   GET_USER_ERROR,
   GET_USER_SUCCESS,
+  SET_USER_ERROR,
+  SET_USER_REQUEST,
+  SET_USER_SUCCESS,
 } from "../actions/usersAction";
 
 const initialState = {
@@ -103,6 +106,25 @@ export const usersReducer = (state = initialState, action) => {
         user: action.user,
       };
     case GET_USER_ERROR:
+      return {
+        ...state,
+        success: false,
+        error: true,
+      };
+    case SET_USER_REQUEST:
+      return {
+        ...state,
+        success: true,
+        error: false,
+      };
+    case SET_USER_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        error: false,
+        user: action.user,
+      };
+    case SET_USER_ERROR:
       return {
         ...state,
         success: false,

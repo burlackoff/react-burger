@@ -3,32 +3,44 @@ import {
 	EmailInput,
 	Input,
 	PasswordInput,
+	Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink } from "react-router-dom";
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../services/actions/usersAction";
+import { getUser, updateUser } from "../../services/actions/usersAction";
 
 function ProfilePage() {
 	const dispatch = useDispatch();
-	const { user } = useSelector((store) => store);
+	const { user } = useSelector((store) => store.userInfo);
 	console.log(user);
 
-	const [valueName, setValueName] = React.useState("Марк");
-	const [valuePass, setValuePass] = React.useState("password");
-	const [valueEmail, setValueEmail] = React.useState("mail@stellar.burgers");
-
-	const onChange = (e) => {
-		setValueEmail(e.target.value);
-	};
-
-	const onChangePass = (e) => {
-		setValuePass(e.target.value);
-	};
+	const [valueName, setValueName] = React.useState("");
+	const [valuePass, setValuePass] = React.useState("");
+	const [valueEmail, setValueEmail] = React.useState("");
 
 	React.useEffect(() => {
-		dispatch(getUser());
+		if (user) {
+			dispatch(getUser());
+			setValueName(user.name);
+			setValueEmail(user.email);
+		}
 	}, []);
+
+	const onSubmit = React.useCallback(
+		(e) => {
+			e.preventDefault();
+			dispatch(
+				updateUser({ email: valueEmail, password: valuePass, name: valueName })
+			);
+		},
+		[valueEmail, valuePass, valueName]
+	);
+
+	const cancleChange = () => {
+		setValueName(user.name);
+		setValueEmail(user.email);
+	};
 
 	return (
 		<>
@@ -67,31 +79,43 @@ function ProfilePage() {
 						В этом разделе вы можете изменить свои персональные данные
 					</p>
 				</nav>
-				<form className={styles.form}>
+				<form className={styles.form} onSubmit={onSubmit}>
 					<Input
 						type="text"
 						placeholder="Имя"
 						onChange={(e) => setValueName(e.target.value)}
 						icon={"EditIcon"}
-						value={valueName}
+						value={user.name}
 						name={"name"}
 						error={false}
 						errorText={"Error"}
 						size={"default"}
 					></Input>
 					<EmailInput
-						onChange={onChange}
-						value={valueEmail}
+						onChange={(e) => setValueEmail(e.target.value)}
+						value={user.email}
 						name={"email"}
 						placeholder="Логин"
 						isIcon={true}
 					></EmailInput>
 					<PasswordInput
-						onChange={onChangePass}
+						onChange={(e) => setValuePass(e.target.value)}
 						value={valuePass}
 						name={"password"}
 						icon={"EditIcon"}
 					></PasswordInput>
+					<div className={styles.buttons}>
+						<Button
+							type="secondary"
+							htmlType="button"
+							onClick={() => cancleChange()}
+						>
+							Отмена
+						</Button>
+						<Button type="primary" htmlType="submit">
+							Сохранить
+						</Button>
+					</div>
 				</form>
 			</div>
 		</>

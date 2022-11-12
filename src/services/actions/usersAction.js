@@ -3,6 +3,7 @@ import {
   registerApi,
   refreshTokenApi,
   getUserApi,
+  updateUserApi,
 } from "../../utils/api";
 import { setCookie } from "../../utils/cookie";
 
@@ -30,6 +31,10 @@ export const GET_USER_REQUEST = "GET_USER_REQUEST";
 export const GET_USER_ERROR = "GET_USER_ERROR";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 
+export const SET_USER_REQUEST = "SET_USER_REQUEST";
+export const SET_USER_SUCCESS = "SET_USER_SUCCESS";
+export const SET_USER_ERROR = "SET_USER_ERROR";
+
 export function register(form) {
   return function (dispatch) {
     dispatch({
@@ -37,6 +42,8 @@ export function register(form) {
     });
     registerApi(form).then((res) => {
       if (res && res.success) {
+        setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
+        setCookie("refreshToken", res.refreshToken.split("Bearer ")[1]);
         dispatch({
           type: REGISTRATION_SUCCESS,
           user: res.user,
@@ -112,6 +119,26 @@ export function getUser() {
       } else {
         dispatch({
           type: GET_USER_ERROR,
+        });
+      }
+    });
+  };
+}
+
+export function updateUser(form) {
+  return function (dispatch) {
+    dispatch({
+      type: SET_USER_REQUEST,
+    });
+    updateUserApi(form).then((res) => {
+      if (res && res.success) {
+        dispatch({
+          type: SET_USER_SUCCESS,
+          user: res.user,
+        });
+      } else {
+        dispatch({
+          type: SET_USER_ERROR,
         });
       }
     });
