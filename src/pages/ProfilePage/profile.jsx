@@ -13,7 +13,6 @@ import { getUser, updateUser } from "../../services/actions/usersAction";
 function ProfilePage() {
 	const dispatch = useDispatch();
 	const { user } = useSelector((store) => store.userInfo);
-	console.log(user);
 
 	const [valueName, setValueName] = React.useState("");
 	const [valuePass, setValuePass] = React.useState("");

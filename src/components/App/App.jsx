@@ -9,6 +9,7 @@ import {
 	ResetPassPage,
 	ProfilePage,
 } from "../../pages";
+import ProtectedRoute from "../ProtectedRouter/ProtectedRoute";
 
 function App() {
 	return (
@@ -31,9 +32,9 @@ function App() {
 					<Route path="/reset-password" exact={true}>
 						<ResetPassPage />
 					</Route>
-					<Route path="/profile" exact={true}>
+					<ProtectedRoute path="/profile" exact={true}>
 						<ProfilePage />
-					</Route>
+					</ProtectedRoute>
 				</Switch>
 			</Router>
 		</>
