@@ -6,3 +6,8 @@
   flex-wrap: wrap;
   gap: 24px;
 }
+
+.link {
+  text-decoration: none;
+  color: var(--text-primary-color);
+}

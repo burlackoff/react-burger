@@ -1,9 +1,19 @@
 import React from "react";
 import style from "./IngredientDetails.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { showIngredientDetails } from "../../services/actions/showIngredientDetails";
 
 function IngredientDetails() {
+	const dispatch = useDispatch();
+	const ingredients = useSelector((store) => store.ingredients.data);
 	const data = useSelector((store) => store.ingredientDetail.ingredient);
+	const { id } = useParams();
+
+	React.useEffect(() => {
+		const findItem = ingredients.find((i) => i._id === id);
+		dispatch(showIngredientDetails(findItem));
+	}, [dispatch, id, ingredients]);
 
 	return (
 		<>
