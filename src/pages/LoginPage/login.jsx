@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import {
 	Button,
 	EmailInput,
@@ -12,7 +12,6 @@ import { useHistory, Redirect } from "react-router-dom";
 function LoginPage() {
 	const { user } = useSelector((store) => store.userInfo);
 	const history = useHistory();
-
 	const dispatch = useDispatch();
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueEmail, setValueEmail] = React.useState("");
@@ -27,13 +26,13 @@ function LoginPage() {
 		[valuePass, valueEmail]
 	);
 
-	const register = useCallback(() => {
+	const register = () => {
 		history.replace({ pathname: "/register" });
-	}, [history]);
+	};
 
-	const forgotPassword = useCallback(() => {
+	const forgotPassword = () => {
 		history.replace({ pathname: "/forgot-password" });
-	}, [history]);
+	};
 
 	if (user.name) {
 		return <Redirect to={{ pathname: "/" }} />;

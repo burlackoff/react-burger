@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
 	EmailInput,
 	Input,
@@ -8,12 +8,17 @@ import {
 import { NavLink } from "react-router-dom";
 import styles from "./profile.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, updateUser } from "../../services/actions/usersAction";
+import {
+	getUser,
+	updateUser,
+	logout,
+} from "../../services/actions/usersAction";
+import { useHistory } from "react-router-dom";
 
 function ProfilePage() {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const { user } = useSelector((store) => store.userInfo);
-
 	const [valueName, setValueName] = React.useState("");
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueEmail, setValueEmail] = React.useState("");
@@ -26,20 +31,22 @@ function ProfilePage() {
 		}
 	}, []);
 
-	const onSubmit = React.useCallback(
-		(e) => {
-			e.preventDefault();
-			dispatch(
-				updateUser({ email: valueEmail, password: valuePass, name: valueName })
-			);
-		},
-		[valueEmail, valuePass, valueName]
-	);
+	const onSubmit = (e) => {
+		e.preventDefault();
+		dispatch(
+			updateUser({ email: valueEmail, password: valuePass, name: valueName })
+		);
+	};
 
 	const cancleChange = () => {
 		setValueName(user.name);
 		setValueEmail(user.email);
 	};
+
+	const logoutUser = useCallback(() => {
+		dispatch(logout());
+		history.replace({ pathname: "/login" });
+	}, []);
 
 	return (
 		<>
@@ -66,9 +73,10 @@ function ProfilePage() {
 						</li>
 						<li className={styles.item}>
 							<NavLink
-								to={{ pathname: "/exit" }}
+								to={{ pathname: "/login" }}
 								className={`${styles.link} text text_type_main-medium text_color_inactive`}
 								activeClassName={styles.active_link}
+								onClick={logoutUser}
 							>
 								Выход
 							</NavLink>
@@ -104,11 +112,7 @@ function ProfilePage() {
 						icon={"EditIcon"}
 					></PasswordInput>
 					<div className={styles.buttons}>
-						<Button
-							type="secondary"
-							htmlType="button"
-							onClick={() => cancleChange()}
-						>
+						<Button type="secondary" htmlType="button" onClick={cancleChange}>
 							Отмена
 						</Button>
 						<Button type="primary" htmlType="submit">

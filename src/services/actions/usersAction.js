@@ -4,6 +4,7 @@ import {
   refreshTokenApi,
   getUserApi,
   updateUserApi,
+  logoutApi,
 } from "../../utils/api";
 import { setCookie } from "../../utils/cookie";
 
@@ -34,6 +35,8 @@ export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 export const SET_USER_REQUEST = "SET_USER_REQUEST";
 export const SET_USER_SUCCESS = "SET_USER_SUCCESS";
 export const SET_USER_ERROR = "SET_USER_ERROR";
+
+export const EXIT_SUCCESS = "EXIT_SUCCESS";
 
 export function register(form) {
   return function (dispatch) {
@@ -67,7 +70,7 @@ export function login(form) {
     loginApi(form).then((res) => {
       if (res && res.success) {
         setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
-        setCookie("refreshToken", res.refreshToken.split("Bearer ")[1]);
+        setCookie("refreshToken", res.refreshToken);
         dispatch({
           type: LOGIN_SUCCESS,
           user: res.user,
@@ -139,6 +142,21 @@ export function updateUser(form) {
       } else {
         dispatch({
           type: SET_USER_ERROR,
+        });
+      }
+    });
+  };
+}
+
+export function logout() {
+  return function (dispatch) {
+    logoutApi().then((res) => {
+      if (res && res.success) {
+        dispatch({
+          type: EXIT_SUCCESS,
+          user: "",
+          accessToken: "",
+          refreshToken: "",
         });
       }
     });

@@ -14,6 +14,7 @@ import {
   SET_USER_ERROR,
   SET_USER_REQUEST,
   SET_USER_SUCCESS,
+  EXIT_SUCCESS,
 } from "../actions/usersAction";
 
 const initialState = {
@@ -129,6 +130,13 @@ export const usersReducer = (state = initialState, action) => {
         ...state,
         success: false,
         error: true,
+      };
+    case EXIT_SUCCESS:
+      return {
+        ...state,
+        user: action.user,
+        accessToken: action.accessToken,
+        refreshToken: action.refreshToken,
       };
     default:
       return state;

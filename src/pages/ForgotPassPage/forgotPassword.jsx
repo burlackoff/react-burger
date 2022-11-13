@@ -13,10 +13,6 @@ function ForgotPassPage() {
 	const history = useHistory();
 	const [valueEmail, setValueEmail] = React.useState("");
 
-	const onChange = (e) => {
-		setValueEmail(e.target.value);
-	};
-
 	const onSubmit = (e) => {
 		e.preventDefault();
 		setEmailApi().then((data) => {
@@ -35,10 +31,10 @@ function ForgotPassPage() {
 	return (
 		<>
 			<div className={styles.wrapper}>
-				<form className={`${styles.form} mb-20`} onSubmit={(e) => onSubmit(e)}>
+				<form className={`${styles.form} mb-20`} onSubmit={onSubmit}>
 					<h1 className="text text_type_main-medium">Восстановление пароля</h1>
 					<EmailInput
-						onChange={onChange}
+						onChange={(e) => setValueEmail(e.target.value)}
 						value={valueEmail}
 						name={"email"}
 						placeholder="Укажите e-mail"

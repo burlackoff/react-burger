@@ -6,10 +6,11 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./resetPassword.module.css";
 import { setResetPassApi } from "../../utils/api";
-import { Redirect } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function ResetPassPage() {
+	const history = useHistory();
 	const { user } = useSelector((store) => store.userInfo);
 
 	const [valuePass, setValuePass] = React.useState("");
@@ -19,6 +20,10 @@ function ResetPassPage() {
 		e.preventDefault();
 		setResetPassApi().then((data) => console.log(data));
 	}, []);
+
+	const login = useCallback(() => {
+		history.replace({ pathname: "/login" });
+	}, [history]);
 
 	if (user.name) {
 		return <Redirect to={{ pathname: "/" }} />;
@@ -53,7 +58,12 @@ function ResetPassPage() {
 					<p className="text text_type_main-default text_color_inactive">
 						Вспомнили пароль?
 					</p>
-					<Button type="secondary" htmlType="button" extraClass={styles.link}>
+					<Button
+						type="secondary"
+						htmlType="button"
+						extraClass={styles.link}
+						onClick={login}
+					>
 						Войти
 					</Button>
 				</div>

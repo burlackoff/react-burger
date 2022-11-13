@@ -77,7 +77,7 @@ export async function logoutApi() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      token: "Bearer " + getCookie("refreshToken"),
+      token: getCookie("refreshToken"),
     }),
   });
   return checkResponse(res);
@@ -88,7 +88,7 @@ export async function refreshTokenApi() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      token: "Bearer " + getCookie("refreshToken"),
+      token: getCookie("refreshToken"),
     }),
   });
   return checkResponse(res);
