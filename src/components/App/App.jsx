@@ -18,14 +18,16 @@ import {
 	ForgotPassPage,
 	ResetPassPage,
 	ProfilePage,
+	IngredientPage,
 } from "../../pages";
 import ProtectedRoute from "../ProtectedRouter/ProtectedRoute";
+import { getIngredients } from "../../services/actions/getIngredients";
 
 function ModalSwitch() {
 	const history = useHistory();
-	const location = useLocation();
+	let location = useLocation();
 
-	const background = location.state && location.state.background;
+	let background = location.state && location.state.background;
 
 	const dispatch = useDispatch();
 	const activeModalIngredient = useSelector(
@@ -59,7 +61,7 @@ function ModalSwitch() {
 					<ProfilePage />
 				</ProtectedRoute>
 				<Route path="/ingredients/:id" exact={true}>
-					<IngredientDetails />
+					<IngredientPage />
 				</Route>
 			</Switch>
 			{background && (
@@ -78,6 +80,13 @@ function ModalSwitch() {
 }
 
 function App() {
+	const dispatch = useDispatch();
+
+	React.useEffect(() => {
+		dispatch(getIngredients());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch]);
+
 	return (
 		<Router>
 			<ModalSwitch />

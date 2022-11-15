@@ -15,6 +15,8 @@ function IngredientDetails() {
 		dispatch(showIngredientDetails(findItem));
 	}, [dispatch, id, ingredients]);
 
+	console.log(data);
+	console.log(ingredients);
 	return (
 		<>
 			<img src={data.image_large} alt={data.name} className={style.image} />

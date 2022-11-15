@@ -5,7 +5,6 @@ import BurgerConstructor from "../../components/BurgerConstructor/BurgerConstruc
 import Modal from "../../components/Modal/Modal";
 import OrderDetails from "../../components/OrderDetails/OrderDetails";
 import { useSelector, useDispatch } from "react-redux";
-import { getIngredients } from "../../services/actions/getIngredients";
 import { setOrder } from "../../services/actions/setOrder";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -26,11 +25,6 @@ function HomePage() {
 			setOrder([bun._id, ...ingredients.map((ing) => ing._id), bun._id])
 		);
 	};
-
-	React.useEffect(() => {
-		dispatch(getIngredients());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch]);
 
 	return (
 		<>

@@ -1,11 +1,11 @@
 import {
   ADD_INGREDIENT_DETAILS,
-  DELETE_INGREDIENT_DETAILS
+  DELETE_INGREDIENT_DETAILS,
 } from "../actions/showIngredientDetails";
 
 const initialState = {
   ingredient: {},
-  active: false
+  active: false,
 };
 
 export const showIngredientDetailsReducer = (state = initialState, action) => {
@@ -14,13 +14,13 @@ export const showIngredientDetailsReducer = (state = initialState, action) => {
       return {
         ...state,
         ingredient: action.ingredient,
-        active: true
+        active: true,
       };
     case DELETE_INGREDIENT_DETAILS:
       return {
         ...state,
-        ingredient: {},
-        active: false
+        ingredient: { ...state.ingredient },
+        active: false,
       };
     default:
       return state;
