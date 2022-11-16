@@ -18,7 +18,6 @@ import {
 	ForgotPassPage,
 	ResetPassPage,
 	ProfilePage,
-	IngredientPage,
 } from "../../pages";
 import ProtectedRoute from "../ProtectedRouter/ProtectedRoute";
 import { getIngredients } from "../../services/actions/getIngredients";
@@ -61,7 +60,8 @@ function ModalSwitch() {
 					<ProfilePage />
 				</ProtectedRoute>
 				<Route path="/ingredients/:id" exact={true}>
-					<IngredientPage />
+					{}
+					<IngredientDetails />
 				</Route>
 			</Switch>
 			{background && (
