@@ -5,21 +5,23 @@ export const SET_ORDER_ERROR = "SET_ORDER_ERROR";
 export const SET_ORDER_SUCCESS = "SET_ORDER_SUCCESS";
 
 export function setOrder(arr) {
-  return function(dispatch) {
+  return function (dispatch) {
     dispatch({
-      type: SET_ORDER_REQUEST
+      type: SET_ORDER_REQUEST,
     });
-    setOrderApi(arr).then(res => {
-      if (res && res.success) {
-        dispatch({
-          type: SET_ORDER_SUCCESS,
-          order: res.order.number
-        });
-      } else {
-        dispatch({
-          type: SET_ORDER_ERROR
-        });
-      }
-    });
+    setOrderApi(arr)
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: SET_ORDER_SUCCESS,
+            order: res.order.number,
+          });
+        } else {
+          dispatch({
+            type: SET_ORDER_ERROR,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 }

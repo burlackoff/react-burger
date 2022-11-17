@@ -43,22 +43,24 @@ export function register(form) {
     dispatch({
       type: REGISTRATION_REQUEST,
     });
-    registerApi(form).then((res) => {
-      if (res && res.success) {
-        setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
-        setCookie("refreshToken", res.refreshToken.split("Bearer ")[1]);
-        dispatch({
-          type: REGISTRATION_SUCCESS,
-          user: res.user,
-          accessToken: res.accessToken,
-          refreshToken: res.refreshToken,
-        });
-      } else {
-        dispatch({
-          type: REGISTRATION_ERROR,
-        });
-      }
-    });
+    registerApi(form)
+      .then((res) => {
+        if (res && res.success) {
+          setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
+          setCookie("refreshToken", res.refreshToken.split("Bearer ")[1]);
+          dispatch({
+            type: REGISTRATION_SUCCESS,
+            user: res.user,
+            accessToken: res.accessToken,
+            refreshToken: res.refreshToken,
+          });
+        } else {
+          dispatch({
+            type: REGISTRATION_ERROR,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 }
 
@@ -67,23 +69,25 @@ export function login(form) {
     dispatch({
       type: LOGIN_REQUEST,
     });
-    loginApi(form).then((res) => {
-      if (res && res.success) {
-        setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
-        setCookie("refreshToken", res.refreshToken);
-        dispatch({
-          type: LOGIN_SUCCESS,
-          user: res.user,
-          accessToken: res.accessToken,
-          refreshToken: res.refreshToken,
-        });
-        form.history.replace({ pathname: "/" });
-      } else {
-        dispatch({
-          type: LOGIN_ERROR,
-        });
-      }
-    });
+    loginApi(form)
+      .then((res) => {
+        if (res && res.success) {
+          setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
+          setCookie("refreshToken", res.refreshToken);
+          dispatch({
+            type: LOGIN_SUCCESS,
+            user: res.user,
+            accessToken: res.accessToken,
+            refreshToken: res.refreshToken,
+          });
+          form.history.replace({ pathname: "/" });
+        } else {
+          dispatch({
+            type: LOGIN_ERROR,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 }
 
@@ -92,19 +96,21 @@ export function refreshToken(token) {
     dispatch({
       type: GET_REFRESH_TOKEN_REQUEST,
     });
-    refreshTokenApi(token).then((res) => {
-      if (res && res.success) {
-        dispatch({
-          type: GET_REFRESH_TOKEN_SUCCESS,
-          accessToken: res.accessToken,
-          refreshToken: res.refreshToken,
-        });
-      } else {
-        dispatch({
-          type: GET_REFRESH_TOKEN_ERROR,
-        });
-      }
-    });
+    refreshTokenApi(token)
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: GET_REFRESH_TOKEN_SUCCESS,
+            accessToken: res.accessToken,
+            refreshToken: res.refreshToken,
+          });
+        } else {
+          dispatch({
+            type: GET_REFRESH_TOKEN_ERROR,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 }
 
@@ -113,18 +119,20 @@ export function getUser() {
     dispatch({
       type: GET_USER_REQUEST,
     });
-    getUserApi().then((res) => {
-      if (res && res.success) {
-        dispatch({
-          type: GET_USER_SUCCESS,
-          user: res.user,
-        });
-      } else {
-        dispatch({
-          type: GET_USER_ERROR,
-        });
-      }
-    });
+    getUserApi()
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: GET_USER_SUCCESS,
+            user: res.user,
+          });
+        } else {
+          dispatch({
+            type: GET_USER_ERROR,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 }
 
@@ -133,32 +141,36 @@ export function updateUser(form) {
     dispatch({
       type: SET_USER_REQUEST,
     });
-    updateUserApi(form).then((res) => {
-      if (res && res.success) {
-        dispatch({
-          type: SET_USER_SUCCESS,
-          user: res.user,
-        });
-      } else {
-        dispatch({
-          type: SET_USER_ERROR,
-        });
-      }
-    });
+    updateUserApi(form)
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: SET_USER_SUCCESS,
+            user: res.user,
+          });
+        } else {
+          dispatch({
+            type: SET_USER_ERROR,
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 }
 
 export function logout() {
   return function (dispatch) {
-    logoutApi().then((res) => {
-      if (res && res.success) {
-        dispatch({
-          type: EXIT_SUCCESS,
-          user: "",
-          accessToken: "",
-          refreshToken: "",
-        });
-      }
-    });
+    logoutApi()
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: EXIT_SUCCESS,
+            user: "",
+            accessToken: "",
+            refreshToken: "",
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 }
