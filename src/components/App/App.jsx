@@ -24,9 +24,9 @@ import { getIngredients } from "../../services/actions/getIngredients";
 
 function ModalSwitch() {
 	const history = useHistory();
-	let location = useLocation();
+	const location = useLocation();
 
-	let background = location.state && location.state.background;
+	const background = location.state && location.state.background;
 
 	const dispatch = useDispatch();
 	const activeModalIngredient = useSelector(
