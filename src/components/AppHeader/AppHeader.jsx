@@ -45,7 +45,13 @@ function AppHeader() {
 					</ul>
 				</nav>
 				<div className={style.logo}>
-					<Logo />
+					<NavLink
+						to={{ pathname: "/" }}
+						exact
+						onClick={() => setType("construct")}
+					>
+						<Logo />
+					</NavLink>
 				</div>
 				<nav>
 					<ul className={style.nav_list}>

@@ -26,23 +26,23 @@ export async function setOrderApi(ingredients) {
   });
 }
 
-export async function setEmailApi() {
+export async function setEmailApi(email) {
   return await request(`${url}password-reset`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      email: "",
+      email: email,
     }),
   });
 }
 
-export async function setResetPassApi() {
+export async function setResetPassApi({ password, token }) {
   return await request(`${url}password-reset/reset`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      password: "",
-      token: "",
+      password: password,
+      token: token,
     }),
   });
 }
@@ -75,7 +75,7 @@ export async function logoutApi() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      token: getCookie("refreshToken"),
+      token: localStorage.getItem("refreshToken"),
     }),
   });
 }
@@ -85,7 +85,7 @@ export async function refreshTokenApi() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      token: getCookie("refreshToken"),
+      token: localStorage.getItem("refreshToken"),
     }),
   });
 }
@@ -95,7 +95,7 @@ export async function getUserApi() {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + getCookie("accessToken"),
+      Authorization: "Bearer " + getCookie("token"),
     },
   });
 }
@@ -105,7 +105,7 @@ export async function updateUserApi({ email, password, name }) {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + getCookie("accessToken"),
+      Authorization: "Bearer " + getCookie("token"),
     },
     body: JSON.stringify({
       email: email,

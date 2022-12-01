@@ -15,6 +15,12 @@ import {
   SET_USER_REQUEST,
   SET_USER_SUCCESS,
   EXIT_SUCCESS,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_ERROR,
+  FORGOT_PASSWORD_SUCCESS,
+  RESET_PASSWORD_REQUEST,
+  RESET_PASSWORD_ERROR,
+  RESET_PASSWORD_SUCCESS,
 } from "../actions/usersAction";
 
 const initialState = {
@@ -26,6 +32,7 @@ const initialState = {
   },
   accessToken: "",
   refreshToken: "",
+  successEmail: false,
 };
 
 export const usersReducer = (state = initialState, action) => {
@@ -137,6 +144,44 @@ export const usersReducer = (state = initialState, action) => {
         user: action.user,
         accessToken: action.accessToken,
         refreshToken: action.refreshToken,
+      };
+    case FORGOT_PASSWORD_REQUEST:
+      return {
+        ...state,
+        success: true,
+        error: false,
+      };
+    case FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        error: false,
+        successEmail: action.successEmail,
+      };
+    case FORGOT_PASSWORD_ERROR:
+      return {
+        ...state,
+        success: false,
+        error: true,
+      };
+    case RESET_PASSWORD_REQUEST:
+      return {
+        ...state,
+        success: true,
+        error: false,
+      };
+    case RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        success: false,
+        error: false,
+        successEmail: false,
+      };
+    case RESET_PASSWORD_ERROR:
+      return {
+        ...state,
+        success: false,
+        error: true,
       };
     default:
       return state;

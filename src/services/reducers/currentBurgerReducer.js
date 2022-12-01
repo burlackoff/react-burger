@@ -2,12 +2,13 @@ import {
   ADD_BURGER_INGREDIENTS,
   SET_BURGER_BUN,
   DELETE_BURGER_INGREDIENT,
-  SORTED_BURGER_INGREDIENTS
+  SORTED_BURGER_INGREDIENTS,
+  RESET_INGREDIENTS,
 } from "../actions/currentBurger";
 
 const initialState = {
   ingredients: [],
-  bun: null
+  bun: null,
 };
 
 export const currentBurgerReducer = (state = initialState, action) => {
@@ -17,25 +18,30 @@ export const currentBurgerReducer = (state = initialState, action) => {
         ...state,
         ingredients: [
           ...state.ingredients,
-          { ...action.data, keyId: action.keyId }
-        ]
+          { ...action.data, keyId: action.keyId },
+        ],
       };
     case SET_BURGER_BUN:
       return {
         ...state,
-        bun: action.data
+        bun: action.data,
       };
     case DELETE_BURGER_INGREDIENT:
       return {
         ...state,
         ingredients: state.ingredients.filter(
           (ing, index) => index !== action.index
-        )
+        ),
       };
     case SORTED_BURGER_INGREDIENTS:
       return {
         ...state,
-        ingredients: action.sorted
+        ingredients: action.sorted,
+      };
+    case RESET_INGREDIENTS:
+      return {
+        ingredients: [],
+        bun: null,
       };
     default:
       return state;

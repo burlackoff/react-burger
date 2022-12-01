@@ -4,29 +4,23 @@ import {
 	EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./forgotPassword.module.css";
-import { setEmailApi } from "../../utils/api";
-import { useHistory, Redirect } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { forgotPassword } from "../../services/actions/usersAction";
 
 function ForgotPassPage() {
-	const { user } = useSelector((store) => store.userInfo);
+	const dispatch = useDispatch();
 	const history = useHistory();
 	const [valueEmail, setValueEmail] = React.useState("");
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		setEmailApi().then((data) => {
-			console.log(data);
-		});
+		dispatch(forgotPassword(valueEmail, history));
 	};
 
 	const login = useCallback(() => {
 		history.replace({ pathname: "/login" });
 	}, [history]);
-
-	if (user.name) {
-		return <Redirect to={{ pathname: "/" }} />;
-	}
 
 	return (
 		<>

@@ -12,6 +12,7 @@ import {
 	sortedIngredients,
 	setBurgerBun,
 	addBurgerIngredient,
+	resetIngredients,
 } from "../../services/actions/currentBurger";
 import { useCallback, useMemo } from "react";
 import BurgerConstructorItem from "../BurgerConstructorItem/BurgerConstructorItem";
@@ -64,6 +65,11 @@ function BurgerConstructor({ openModal }) {
 				moveIng={moveIngredient}
 			/>
 		);
+	};
+
+	const setOrder = () => {
+		dispatch(resetIngredients());
+		openModal();
 	};
 
 	return (
@@ -131,7 +137,7 @@ function BurgerConstructor({ openModal }) {
 								type="primary"
 								size="large"
 								htmlType="button"
-								onClick={openModal}
+								onClick={setOrder}
 							>
 								Оформить заказ
 							</Button>

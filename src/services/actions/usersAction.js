@@ -5,6 +5,8 @@ import {
   getUserApi,
   updateUserApi,
   logoutApi,
+  setEmailApi,
+  setResetPassApi,
 } from "../../utils/api";
 import { setCookie } from "../../utils/cookie";
 
@@ -46,8 +48,8 @@ export function register(form) {
     registerApi(form)
       .then((res) => {
         if (res && res.success) {
-          setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
-          setCookie("refreshToken", res.refreshToken.split("Bearer ")[1]);
+          setCookie("token", res.accessToken.split("Bearer ")[1]);
+          localStorage.setItem("refreshToken", res.refreshToken);
           dispatch({
             type: REGISTRATION_SUCCESS,
             user: res.user,
@@ -72,8 +74,8 @@ export function login(form) {
     loginApi(form)
       .then((res) => {
         if (res && res.success) {
-          setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
-          setCookie("refreshToken", res.refreshToken);
+          setCookie("token", res.accessToken.split("Bearer ")[1]);
+          localStorage.setItem("refreshToken", res.refreshToken);
           dispatch({
             type: LOGIN_SUCCESS,
             user: res.user,
@@ -91,14 +93,54 @@ export function login(form) {
   };
 }
 
-export function refreshToken(token) {
+export function forgotPassword(email, history) {
+  return function (dispatch) {
+    dispatch({
+      type: FORGOT_PASSWORD_REQUEST,
+    });
+    setEmailApi(email)
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: FORGOT_PASSWORD_SUCCESS,
+            successEmail: true,
+          });
+          history.replace({ pathname: "/reset-password" });
+        } else {
+          dispatch({ type: FORGOT_PASSWORD_ERROR });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+}
+
+export function resetPassword(form) {
+  return function (dispatch) {
+    dispatch({ type: RESET_PASSWORD_REQUEST });
+    setResetPassApi(form)
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: RESET_PASSWORD_SUCCESS,
+          });
+        } else {
+          dispatch({ type: RESET_PASSWORD_ERROR });
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+}
+
+export function refreshToken() {
   return function (dispatch) {
     dispatch({
       type: GET_REFRESH_TOKEN_REQUEST,
     });
-    refreshTokenApi(token)
+    refreshTokenApi()
       .then((res) => {
         if (res && res.success) {
+          setCookie("token", res.accessToken.split("Bearer ")[1]);
+          localStorage.setItem("refreshToken", res.refreshToken);
           dispatch({
             type: GET_REFRESH_TOKEN_SUCCESS,
             accessToken: res.accessToken,
@@ -163,6 +205,8 @@ export function logout() {
     logoutApi()
       .then((res) => {
         if (res && res.success) {
+          setCookie("token", "");
+          localStorage.removeItem("refreshToken");
           dispatch({
             type: EXIT_SUCCESS,
             user: "",

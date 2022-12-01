@@ -21,6 +21,8 @@ import {
 } from "../../pages";
 import ProtectedRoute from "../ProtectedRouter/ProtectedRoute";
 import { getIngredients } from "../../services/actions/getIngredients";
+import { getUser, refreshToken } from "../../services/actions/usersAction";
+import { getCookie } from "../../utils/cookie";
 
 function ModalSwitch() {
 	const history = useHistory();
@@ -41,26 +43,25 @@ function ModalSwitch() {
 		<>
 			<AppHeader />
 			<Switch location={background || location}>
-				<Route path="/" exact={true}>
+				<Route path="/" exact>
 					<HomePage />
 				</Route>
-				<Route path="/login" exact={true}>
+				<Route path="/login" exact>
 					<LoginPage />
 				</Route>
-				<Route path="/register" exact={true}>
+				<Route path="/register" exact>
 					<RegisterPage />
 				</Route>
-				<Route path="/forgot-password" exact={true}>
+				<Route path="/forgot-password" exact>
 					<ForgotPassPage />
 				</Route>
-				<Route path="/reset-password" exact={true}>
+				<Route path="/reset-password" exact>
 					<ResetPassPage />
 				</Route>
-				<ProtectedRoute path="/profile" exact={true}>
+				<ProtectedRoute path="/profile" exact>
 					<ProfilePage />
 				</ProtectedRoute>
-				<Route path="/ingredients/:id" exact={true}>
-					{}
+				<Route path="/ingredients/:id" exact>
 					<IngredientDetails />
 				</Route>
 			</Switch>
@@ -81,11 +82,21 @@ function ModalSwitch() {
 
 function App() {
 	const dispatch = useDispatch();
+	const cookie = getCookie("token");
+	const token = localStorage.getItem("refreshToken");
 
 	React.useEffect(() => {
 		dispatch(getIngredients());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch]);
+
+	React.useEffect(() => {
+		if (!cookie && token) {
+			dispatch(refreshToken());
+		} else if (cookie && token) {
+			dispatch(getUser());
+		}
+	}, [cookie, token]);
 
 	return (
 		<Router>

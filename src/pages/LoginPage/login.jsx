@@ -7,11 +7,12 @@ import {
 import styles from "./login.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../services/actions/usersAction";
-import { useHistory, Redirect } from "react-router-dom";
+import { useHistory, Redirect, useLocation } from "react-router-dom";
 
 function LoginPage() {
 	const { user } = useSelector((store) => store.userInfo);
 	const history = useHistory();
+	const location = useLocation();
 	const dispatch = useDispatch();
 	const [valuePass, setValuePass] = React.useState("");
 	const [valueEmail, setValueEmail] = React.useState("");
@@ -35,7 +36,7 @@ function LoginPage() {
 	};
 
 	if (user.name) {
-		return <Redirect to={{ pathname: "/" }} />;
+		return <Redirect to={location?.state?.from || "/"} />;
 	}
 
 	return (

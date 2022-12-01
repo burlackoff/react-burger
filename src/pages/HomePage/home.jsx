@@ -8,8 +8,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { setOrder } from "../../services/actions/setOrder";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { useHistory } from "react-router-dom";
+import { getCookie } from "../../utils/cookie";
 
 function HomePage() {
+	const history = useHistory();
 	const { ingredients } = useSelector((store) => store.burgerIngredients);
 	const { bun } = useSelector((store) => store.burgerIngredients);
 	const dispatch = useDispatch();
@@ -20,10 +23,16 @@ function HomePage() {
 	};
 
 	const handleOpenModalOrder = () => {
-		setActiveModalOrder(true);
-		dispatch(
-			setOrder([bun._id, ...ingredients.map((ing) => ing._id), bun._id])
-		);
+		const refreshToken = localStorage.getItem("refreshToken");
+		const accessToken = getCookie("token");
+		if (accessToken && refreshToken) {
+			setActiveModalOrder(true);
+			dispatch(
+				setOrder([bun._id, ...ingredients.map((ing) => ing._id), bun._id])
+			);
+		} else {
+			history.push("/login");
+		}
 	};
 
 	return (
