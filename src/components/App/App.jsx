@@ -1,61 +1,108 @@
-import React from 'react';
-import style from './App.module.css';
-import AppHeader from '../AppHeader/AppHeader'; 
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import Modal from '../Modal/Modal';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import OrderDetails from '../OrderDetails/OrderDetails';
-import {useSelector, useDispatch} from 'react-redux';
-import {getIngredients} from '../../services/actions/getIngredients';
-import {setOrder} from '../../services/actions/setOrder';
-import {deleteIngredientDetails} from '../../services/actions/showIngredientDetails';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from "react-dnd-html5-backend";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import AppHeader from "../AppHeader/AppHeader";
+import Modal from "../Modal/Modal";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import { deleteIngredientDetails } from "../../services/actions/showIngredientDetails";
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	useLocation,
+	useHistory,
+} from "react-router-dom";
+import {
+	HomePage,
+	LoginPage,
+	RegisterPage,
+	ForgotPassPage,
+	ResetPassPage,
+	ProfilePage,
+} from "../../pages";
+import ProtectedRoute from "../ProtectedRouter/ProtectedRoute";
+import { getIngredients } from "../../services/actions/getIngredients";
+import { getUser, refreshToken } from "../../services/actions/usersAction";
+import { getCookie } from "../../utils/cookie";
+
+function ModalSwitch() {
+	const history = useHistory();
+	const location = useLocation();
+
+	const background = location.state && location.state.background;
+
+	const dispatch = useDispatch();
+	const activeModalIngredient = useSelector(
+		(store) => store.ingredientDetail.active
+	);
+	const handleCloseModalIngredient = () => {
+		dispatch(deleteIngredientDetails());
+		history.goBack();
+	};
+
+	return (
+		<>
+			<AppHeader />
+			<Switch location={background || location}>
+				<Route path="/" exact>
+					<HomePage />
+				</Route>
+				<Route path="/login" exact>
+					<LoginPage />
+				</Route>
+				<Route path="/register" exact>
+					<RegisterPage />
+				</Route>
+				<Route path="/forgot-password" exact>
+					<ForgotPassPage />
+				</Route>
+				<Route path="/reset-password" exact>
+					<ResetPassPage />
+				</Route>
+				<ProtectedRoute path="/profile" exact>
+					<ProfilePage />
+				</ProtectedRoute>
+				<Route path="/ingredients/:id" exact>
+					<IngredientDetails />
+				</Route>
+			</Switch>
+			{background && (
+				<Route path="/ingredients/:id">
+					<Modal
+						onClose={handleCloseModalIngredient}
+						visible={activeModalIngredient}
+						title={"Детали ингредиента"}
+					>
+						<IngredientDetails />
+					</Modal>
+				</Route>
+			)}
+		</>
+	);
+}
 
 function App() {
-  const {ingredients} = useSelector(store => store.burgerIngredients);
-  const {bun} = useSelector(store => store.burgerIngredients);
-  const activeModalIngredient = useSelector(store => store.ingredientDetail.active);
-  const dispatch = useDispatch();
-  const [activeModalOrder, setActiveModalOrder] = React.useState(false);
+	const dispatch = useDispatch();
+	const cookie = getCookie("token");
+	const token = localStorage.getItem("refreshToken");
 
-  const handleCloseModalOrder = () => {
-    setActiveModalOrder(false)
-  }
+	React.useEffect(() => {
+		dispatch(getIngredients());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch]);
 
-  const handleOpenModalOrder = () => {
-    setActiveModalOrder(true)
-    dispatch(setOrder([bun._id, ...ingredients.map(ing => ing._id), bun._id]));
-  }
+	React.useEffect(() => {
+		if (!cookie && token) {
+			dispatch(refreshToken());
+		} else if (cookie && token) {
+			dispatch(getUser());
+		}
+	}, [cookie, token]);
 
-  const handleCloseModalIngredient = () => {
-    dispatch(deleteIngredientDetails())
-  }
-
-  React.useEffect(() => {
-    dispatch(getIngredients())
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch])
-
-
-  return (
-    <>
-      <AppHeader />
-      <DndProvider backend={HTML5Backend}>
-        <main className={`${style.contentWrapper} mb-10`}>
-          <BurgerIngredients/>
-          <BurgerConstructor openModal={handleOpenModalOrder}/>
-        </main>
-      </DndProvider>
-      <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
-        <IngredientDetails/>
-      </Modal>
-      <Modal onClose={handleCloseModalOrder} visible={activeModalOrder} >
-        <OrderDetails/>
-      </Modal>
-    </>
-  );
+	return (
+		<Router>
+			<ModalSwitch />
+		</Router>
+	);
 }
 
 export default App;

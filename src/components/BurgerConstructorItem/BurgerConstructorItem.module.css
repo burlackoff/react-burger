@@ -6,11 +6,11 @@
 
 .icon {
   cursor: pointer;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .icon:hover {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .item_hover {
