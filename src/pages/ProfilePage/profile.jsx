@@ -25,7 +25,6 @@ function ProfilePage() {
 
 	React.useEffect(() => {
 		if (user) {
-			// dispatch(getUser());
 			setValueName(user.name);
 			setValueEmail(user.email);
 		}
