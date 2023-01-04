@@ -25,7 +25,7 @@ function ProfilePage() {
 
 	React.useEffect(() => {
 		if (user) {
-			dispatch(getUser());
+			// dispatch(getUser());
 			setValueName(user.name);
 			setValueEmail(user.email);
 		}
@@ -92,7 +92,7 @@ function ProfilePage() {
 						placeholder="Имя"
 						onChange={(e) => setValueName(e.target.value)}
 						icon={"EditIcon"}
-						value={user.name}
+						value={valueName}
 						name={"name"}
 						error={false}
 						errorText={"Error"}
@@ -100,7 +100,7 @@ function ProfilePage() {
 					></Input>
 					<EmailInput
 						onChange={(e) => setValueEmail(e.target.value)}
-						value={user.email}
+						value={valueEmail}
 						name={"email"}
 						placeholder="Логин"
 						isIcon={true}
