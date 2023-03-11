@@ -1,9 +1,19 @@
+.wrapper {
+  margin: 0 auto;
+  max-width: 720px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
 .image {
   width: 480px;
   height: 240px;
 }
 
-.infoList {
+.info_list {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -14,7 +24,7 @@
   width: 100%;
 }
 
-.infoItem {
+.info_item {
   max-width: 120px;
   width: 100%;
   display: flex;

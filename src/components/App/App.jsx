@@ -1,69 +1,108 @@
-import React from 'react';
-import AppHeader from '../AppHeader/AppHeader'; 
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import style from './App.module.css';
-import Modal from '../Modal/Modal';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import OrderDetails from '../OrderDetails/OrderDetails';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import AppHeader from "../AppHeader/AppHeader";
+import Modal from "../Modal/Modal";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import { deleteIngredientDetails } from "../../services/actions/showIngredientDetails";
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+	useLocation,
+	useHistory,
+} from "react-router-dom";
+import {
+	HomePage,
+	LoginPage,
+	RegisterPage,
+	ForgotPassPage,
+	ResetPassPage,
+	ProfilePage,
+} from "../../pages";
+import ProtectedRoute from "../ProtectedRouter/ProtectedRoute";
+import { getIngredients } from "../../services/actions/getIngredients";
+import { getUser, refreshToken } from "../../services/actions/usersAction";
+import { getCookie } from "../../utils/cookie";
+
+function ModalSwitch() {
+	const history = useHistory();
+	const location = useLocation();
+
+	const background = location.state && location.state.background;
+
+	const dispatch = useDispatch();
+	const activeModalIngredient = useSelector(
+		(store) => store.ingredientDetail.active
+	);
+	const handleCloseModalIngredient = () => {
+		dispatch(deleteIngredientDetails());
+		history.goBack();
+	};
+
+	return (
+		<>
+			<AppHeader />
+			<Switch location={background || location}>
+				<Route path="/" exact>
+					<HomePage />
+				</Route>
+				<Route path="/login" exact>
+					<LoginPage />
+				</Route>
+				<Route path="/register" exact>
+					<RegisterPage />
+				</Route>
+				<Route path="/forgot-password" exact>
+					<ForgotPassPage />
+				</Route>
+				<Route path="/reset-password" exact>
+					<ResetPassPage />
+				</Route>
+				<ProtectedRoute path="/profile" exact>
+					<ProfilePage />
+				</ProtectedRoute>
+				<Route path="/ingredients/:id" exact>
+					<IngredientDetails />
+				</Route>
+			</Switch>
+			{background && (
+				<Route path="/ingredients/:id">
+					<Modal
+						onClose={handleCloseModalIngredient}
+						visible={activeModalIngredient}
+						title={"Детали ингредиента"}
+					>
+						<IngredientDetails />
+					</Modal>
+				</Route>
+			)}
+		</>
+	);
+}
 
 function App() {
-  const [ingredients, setIngredients] = React.useState([]);
-  const [currentData, setCurrentData] = React.useState({});
-  const [activeModalOrder, setActiveModalOrder] = React.useState(false);
-  const [activeModalIngredient, setActiveModalIngredient] = React.useState(false);
+	const dispatch = useDispatch();
+	const cookie = getCookie("token");
+	const token = localStorage.getItem("refreshToken");
 
-  const handleCurrentData = (data) => {
-    setCurrentData(data)
-    setActiveModalIngredient(state => !state)
-  }
+	React.useEffect(() => {
+		dispatch(getIngredients());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch]);
 
-  const handleCloseModalOrder = () => {
-    setActiveModalOrder(false)
-  }
+	React.useEffect(() => {
+		if (!cookie && token) {
+			dispatch(refreshToken());
+		} else if (cookie && token) {
+			dispatch(getUser());
+		}
+	}, [cookie, token]);
 
-  const handleOpenModalOrder = () => {
-    setActiveModalOrder(true)
-  }
-
-  const handleCloseModalIngredient = () => {
-    setActiveModalIngredient(false)
-  }
-
-
-  React.useEffect(() => {
-    const getData = () => {
-      fetch('https://norma.nomoreparties.space/api/ingredients')
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(res.status);
-            })
-            .then(response => setIngredients(response.data))
-            .catch(err => console.error(err))
-    }
-    getData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  return (
-    <>
-      <AppHeader />
-      <main className={style.contentWrapper + ' mb-10'}>
-        
-        <BurgerIngredients data={ingredients} openModal={handleCurrentData}/>
-        {ingredients.length > 0 && <BurgerConstructor data={ingredients} openModal={handleOpenModalOrder}/>}
-        
-      </main>
-      <Modal onClose={handleCloseModalIngredient} visible={activeModalIngredient} title={'Детали ингредиента'}>
-        <IngredientDetails data={currentData}/>
-      </Modal>
-      <Modal onClose={handleCloseModalOrder} visible={activeModalOrder} >
-        <OrderDetails/>
-      </Modal>
-    </>
-  );
+	return (
+		<Router>
+			<ModalSwitch />
+		</Router>
+	);
 }
 
 export default App;
