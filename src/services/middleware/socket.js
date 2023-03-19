@@ -12,7 +12,7 @@ export const socketMiddleware = (wsActions) => {
 
       if (type === wsInit) {
         const isAuth = payload.isAuth;
-        const accessToken = getCookie("accessToken");
+        const accessToken = getCookie("token");
 
         const wsUrl = isAuth
           ? payload.url + `?token=${accessToken}`

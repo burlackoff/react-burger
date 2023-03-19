@@ -26,7 +26,6 @@ import { getCookie } from "../../utils/cookie";
 import FeedPage from "../../pages/FeedPage/feed";
 import OrderHistoryPage from "../../pages/OrderHistoryPage/orderHistoryPage";
 import OrderAuthDetails from "../OrderAuthDetails/OrderAuthDetails";
-import ModalOrderInfo from "../ModalOrderInfo/ModalOrderInfo";
 import OrderDetailsInfo from "../OrderDetailsInfo/OrderDetailsInfo";
 
 function ModalSwitch() {
@@ -95,12 +94,17 @@ function ModalSwitch() {
 			)}
 			{background && (
 				<Route path="/feed/:id">
-					<ModalOrderInfo />
+					<Modal onClose={() => history.goBack()} visible>
+						<OrderDetailsInfo />
+					</Modal>
 				</Route>
 			)}
 			{background && (
 				<Route path="/profile/orders/:id">
-					<ModalOrderInfo />
+					<Modal onClose={() => history.goBack()} visible>
+						<OrderAuthDetails />
+					</Modal>
+					s
 				</Route>
 			)}
 		</>
