@@ -23,6 +23,7 @@ import ProtectedRoute from "../ProtectedRouter/ProtectedRoute";
 import { getIngredients } from "../../services/actions/getIngredients";
 import { getUser, refreshToken } from "../../services/actions/usersAction";
 import { getCookie } from "../../utils/cookie";
+import FeedPage from "../../pages/FeedPage/feed";
 
 function ModalSwitch() {
 	const history = useHistory();
@@ -63,6 +64,12 @@ function ModalSwitch() {
 				</ProtectedRoute>
 				<Route path="/ingredients/:id" exact>
 					<IngredientDetails />
+				</Route>
+				<Route path="/feed" exact>
+					<FeedPage />
+				</Route>
+				<Route path="/feed/:id" exact>
+					<FeedPage />
 				</Route>
 			</Switch>
 			{background && (

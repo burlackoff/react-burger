@@ -1,0 +1,66 @@
+.wrapper {
+  margin-bottom: 16px;
+  padding: 24px;
+  width: 536px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: var(--background);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 2px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.04);
+  border-radius: 40px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  color: var(--text-primary-color);
+}
+
+.status {
+  color: var(--colors-interface-success);
+  margin: 0;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.ingredients_list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+}
+
+.list {
+  flex-shrink: 0;
+  max-width: 610px;
+  position: relative;
+}
+
+.list:not(:last-child) {
+  margin-right: -20px;
+}
+
+.disabled_count {
+  position: absolute;
+  color: var(--text-primary-color);
+  top: 32%;
+  left: 35%;
+  z-index: 2
+}
+
+.disabledImg {
+  opacity: .6;
+}
+
+.price {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
