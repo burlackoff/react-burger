@@ -1,15 +1,34 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useHistory, useLocation } from "react-router-dom";
 import Order from "../../components/Order/Order";
 import styles from "./orderHistoryPage.module.css";
 import { logout } from "../../services/actions/usersAction";
+import {
+	WS_CONNECTION_START,
+	WS_CONNECTION_STOP,
+} from "../../services/actions/wsAction";
 
 function OrderHistoryPage() {
 	const orders = useSelector((store) => store.wsOrders.orders);
 	const dispatch = useDispatch();
 	const location = useLocation();
 	const history = useHistory();
+
+	useEffect(() => {
+		dispatch({
+			type: WS_CONNECTION_START,
+			payload: {
+				url: "wss://norma.nomoreparties.space/orders",
+				isAuth: true,
+			},
+		});
+		return () => {
+			dispatch({
+				type: WS_CONNECTION_STOP,
+			});
+		};
+	}, [dispatch]);
 
 	const logoutUser = useCallback(() => {
 		dispatch(logout());
@@ -25,7 +44,6 @@ function OrderHistoryPage() {
 							<NavLink
 								to={{ pathname: "/profile" }}
 								className={`${styles.link} text text_type_main-medium text_color_inactive`}
-								activeClassName={`${styles.active_link}`}
 							>
 								Профиль
 							</NavLink>

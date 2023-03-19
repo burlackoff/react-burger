@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import style from "./OrderAuthDetails.module.css";
+import style from "./OrderDetailsInfo.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import OrderInfo from "../OrderInfo/OrderInfo";
@@ -8,7 +8,7 @@ import {
 	WS_CONNECTION_STOP,
 } from "../../services/actions/wsAction";
 
-function OrderAuthDetails() {
+function OrderDetailsInfo() {
 	const orders = useSelector((store) => store.wsOrders.orders);
 	const ingredients = useSelector((store) => store.ingredients.data);
 	const location = useLocation();
@@ -19,8 +19,8 @@ function OrderAuthDetails() {
 		dispatch({
 			type: WS_CONNECTION_START,
 			payload: {
-				url: "wss://norma.nomoreparties.space/orders",
-				isAuth: true,
+				url: "wss://norma.nomoreparties.space/orders/all",
+				isAuth: false,
 			},
 		});
 		return () => {
@@ -34,7 +34,7 @@ function OrderAuthDetails() {
 
 	if (location.state === undefined) {
 		return (
-			order !== undefined && (
+			order && (
 				<section className={style.wrapper_page}>
 					<OrderInfo order={order} ingredients={ingredients} />
 				</section>
@@ -51,4 +51,4 @@ function OrderAuthDetails() {
 	);
 }
 
-export default OrderAuthDetails;
+export default OrderDetailsInfo;

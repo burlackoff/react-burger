@@ -34,7 +34,7 @@ function AppHeader() {
 							<NavLink
 								className={`${style.link} p-4 text text_type_main-default`}
 								activeClassName={style.link_active}
-								to={{ pathname: "/profile/order" }}
+								to={{ pathname: "/feed" }}
 								exact={true}
 								onClick={() => setType("strip")}
 							>
