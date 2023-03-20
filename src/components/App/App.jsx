@@ -23,6 +23,10 @@ import ProtectedRoute from "../ProtectedRouter/ProtectedRoute";
 import { getIngredients } from "../../services/actions/getIngredients";
 import { getUser, refreshToken } from "../../services/actions/usersAction";
 import { getCookie } from "../../utils/cookie";
+import FeedPage from "../../pages/FeedPage/feed";
+import OrderHistoryPage from "../../pages/OrderHistoryPage/orderHistoryPage";
+import OrderAuthDetails from "../OrderAuthDetails/OrderAuthDetails";
+import OrderDetailsInfo from "../OrderDetailsInfo/OrderDetailsInfo";
 
 function ModalSwitch() {
 	const history = useHistory();
@@ -58,11 +62,23 @@ function ModalSwitch() {
 				<Route path="/reset-password" exact>
 					<ResetPassPage />
 				</Route>
-				<ProtectedRoute path="/profile" exact>
+				<ProtectedRoute path="/profile" exact onlyAuth>
 					<ProfilePage />
+				</ProtectedRoute>
+				<ProtectedRoute path="/profile/order" exact onlyAuth>
+					<OrderHistoryPage />
+				</ProtectedRoute>
+				<ProtectedRoute path="/profile/orders/:id" exact onlyAuth>
+					<OrderAuthDetails />
 				</ProtectedRoute>
 				<Route path="/ingredients/:id" exact>
 					<IngredientDetails />
+				</Route>
+				<Route path="/feed" exact>
+					<FeedPage />
+				</Route>
+				<Route path="/feed/:id" exact>
+					<OrderDetailsInfo />
 				</Route>
 			</Switch>
 			{background && (
@@ -76,6 +92,21 @@ function ModalSwitch() {
 					</Modal>
 				</Route>
 			)}
+			{background && (
+				<Route path="/feed/:id">
+					<Modal onClose={() => history.goBack()} visible>
+						<OrderDetailsInfo />
+					</Modal>
+				</Route>
+			)}
+			{background && (
+				<Route path="/profile/orders/:id">
+					<Modal onClose={() => history.goBack()} visible>
+						<OrderAuthDetails />
+					</Modal>
+					s
+				</Route>
+			)}
 		</>
 	);
 }
@@ -87,7 +118,6 @@ function App() {
 
 	React.useEffect(() => {
 		dispatch(getIngredients());
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch]);
 
 	React.useEffect(() => {
@@ -96,7 +126,7 @@ function App() {
 		} else if (cookie && token) {
 			dispatch(getUser());
 		}
-	}, [cookie, token]);
+	}, [cookie, token, dispatch]);
 
 	return (
 		<Router>

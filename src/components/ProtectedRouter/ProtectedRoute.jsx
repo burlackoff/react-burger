@@ -1,37 +1,37 @@
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { getUser } from "../../services/actions/usersAction";
+import { getCookie } from "../../utils/cookie";
+import { useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function ProtectedRoute({ children, ...rest }) {
-	const { user } = useSelector((store) => store.userInfo);
-	const [isUserLoaded, setUserLoaded] = useState(false);
+const ProtectedRoute = ({ onlyAuth = false, children, ...rest }) => {
+	const isAuthorized = getCookie("token");
+	const location = useLocation();
 
-	const init = () => {
-		getUser();
-		setUserLoaded(true);
-	};
+	if (!onlyAuth && isAuthorized) {
+		const { from } = location.state || { from: { pathname: "/" } };
 
-	useEffect(() => {
-		init();
-	}, []);
-
-	if (!isUserLoaded) {
-		return null;
+		return (
+			<Route {...rest}>
+				<Redirect to={from} />
+			</Route>
+		);
 	}
 
-	return (
-		<Route
-			{...rest}
-			render={({ location }) =>
-				user.name ? (
-					children
-				) : (
-					<Redirect to={{ pathname: "/login", state: { from: location } }} />
-				)
-			}
-		/>
-	);
-}
+	if (onlyAuth && !isAuthorized) {
+		return (
+			<Route {...rest}>
+				<Redirect to={{ pathname: "/login", state: { from: location } }} />
+			</Route>
+		);
+	}
+
+	return <Route {...rest}>{children}</Route>;
+};
+
+ProtectedRoute.propTypes = {
+	children: PropTypes.node.isRequired,
+	onlyAuth: PropTypes.bool.isRequired,
+};
 
 export default ProtectedRoute;

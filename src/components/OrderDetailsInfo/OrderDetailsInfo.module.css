@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper_page {
+  margin: 122px auto 0;
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+}

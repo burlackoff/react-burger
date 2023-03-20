@@ -28,7 +28,7 @@ function ProfilePage() {
 			setValueName(user.name);
 			setValueEmail(user.email);
 		}
-	}, []);
+	}, [user]);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -45,7 +45,7 @@ function ProfilePage() {
 	const logoutUser = useCallback(() => {
 		dispatch(logout());
 		history.replace({ pathname: "/login" });
-	}, []);
+	}, [dispatch, history]);
 
 	return (
 		<>
